@@ -1,8 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
+import { Input } from "antd";
+import { Button } from 'antd';
 
 function Raffle() {
+
+    const [searchInfo, setSearchInfo] = useState(" ");
+
+    const handleInput = event => {
+      setSearchInfo(event.target.value);  
+    };
+  
+    const logValue = () => {
+      console.log(searchInfo);
+    };
+    
     return (
-        <h1>Hello</h1>
+        <div>
+            <Input onChange={handleInput} placeholder="Link" />
+            <Button onClick={logValue} type="primary">Search</Button>
+        </div>
     );
 }
 
