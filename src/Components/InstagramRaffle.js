@@ -21,6 +21,6 @@ const InstagramRaffle = () => {
             <Button onClick={logValue} type="primary">Search</Button>
         </div>
     );
-}
+};
 
 export default InstagramRaffle;

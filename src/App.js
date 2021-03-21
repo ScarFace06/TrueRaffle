@@ -52,6 +52,6 @@ import { MenuUnfoldOutlined } from '@ant-design/icons';
       
     </Router>
   );
-}
+};
 
 export default App;

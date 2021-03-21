@@ -21,6 +21,6 @@ const TwitterRaffle = () => {
             <Button onClick={logValue} type="primary">Search</Button>
         </div>
     );
-}
+};
 
 export default TwitterRaffle;
