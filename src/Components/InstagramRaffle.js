@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
 
-function Raffle() {
+const InstagramRaffle = () => {
 
     const [searchInfo, setSearchInfo] = useState(" ");
 
@@ -16,10 +16,11 @@ function Raffle() {
     
     return (
         <div>
+            <h3 style = {{textAlign: "center"}}>Instagram</h3>
             <Input onChange={handleInput} placeholder="Link" />
             <Button onClick={logValue} type="primary">Search</Button>
         </div>
     );
 }
 
-export default Raffle;
+export default InstagramRaffle;
