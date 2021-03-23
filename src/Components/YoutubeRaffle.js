@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
+import {execute} from "../API/ytAPI";
 
 function YoutubeRaffle() {
 
@@ -9,9 +10,9 @@ function YoutubeRaffle() {
     const handleInput = event => {
       setSearchInfo(event.target.value);  
     };
-  
+    
     const logValue = () => {
-      console.log(searchInfo);
+      execute(searchInfo);
     };
     
     return (
