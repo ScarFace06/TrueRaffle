@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
+import { get_retweets } from "../API/twAPI";
 
 const TwitterRaffle = () => {
 
@@ -11,7 +12,8 @@ const TwitterRaffle = () => {
     };
   
     const logValue = () => {
-      console.log(searchInfo);
+      get_retweets(searchInfo);
+
     };
     
     return (

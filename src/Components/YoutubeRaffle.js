@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
-import {execute} from "../API/ytAPI";
+import {get_comments} from "../API/ytAPI";
 
 function YoutubeRaffle() {
 
@@ -12,7 +12,7 @@ function YoutubeRaffle() {
     };
     
     const logValue = () => {
-      execute(searchInfo);
+      get_comments(searchInfo);
     };
     
     return (
