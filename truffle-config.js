@@ -22,6 +22,7 @@ module.exports = {
         return new HDWalletProvider(mnemonic, kovan_url);
       },
       network_id: '42',
+      gas: 4700000
     },
 
     ropsten:{
@@ -31,6 +32,11 @@ module.exports = {
       network_id:'3',
     }
 
+  },
+  compilers: {
+    solc: {
+      version: '0.6.12',
+    },
   },
   api_keys: {
     etherscan: process.env.ETHERSCAN_API_KEY

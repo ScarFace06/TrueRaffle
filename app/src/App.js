@@ -11,6 +11,7 @@ import { MenuUnfoldOutlined } from '@ant-design/icons';
 import { newContextComponents } from "@drizzle/react-components";
 import YoutubeRaffle from "./Components/YoutubeRaffle";
 import InstagramRaffle from "./Components/InstagramRaffle";
+import WinnerComp from "./Components/WinnerComp";
 
 const drizzle = new Drizzle(drizzleOptions);
 const { AccountData, ContractData, ContractForm } = newContextComponents;
@@ -67,7 +68,7 @@ const App = () => {
                                     <Route path = "/" exact component = {Home}/>
                                     <Route path = "/Test" exact children = { <MyComponent drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                                     <Route path = "/Youtube" exact children = {<YoutubeRaffle/>}/>
-                                    <Route path = "/Instagram" exact component = {InstagramRaffle}/>
+                                    <Route path = "/Instagram" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
 
 
                                     <Route component = {()=>{
