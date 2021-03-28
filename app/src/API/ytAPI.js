@@ -15,7 +15,7 @@ const yt_api = process.env.REACT_APP_YOUTUBE_API;
 }
 
 
-    
+
 export const get_comments = async (link) => {
     let id = youtube_parser(link);
     var baseUrl = 'https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&order=time&maxResults=100&videoId=' + id;
@@ -30,26 +30,23 @@ export const get_comments = async (link) => {
                 var response = await resi.json();
 
                 for (var i = 0; i < response.items.length; i++) {
-                    
+
                     res.comments.push({
                         user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
                         comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
                         ChannelID: response.items[i].snippet.topLevelComment.snippet.authorChannelId.value,
                         time: response.items[i].snippet.topLevelComment.snippet.publishedAt
-                    });     
+                    });
                 }
 
                 nextPageToken = response.nextPageToken ? response.nextPageToken : 0;
-                url = baseUrl+"&pageToken="+nextPageToken+'&key='+yt_api;        
-                
-            }      
-        
+                url = baseUrl+"&pageToken="+nextPageToken+'&key='+yt_api;
+
+            }
+
         console.log(res);
     } else {
         alert('No valid link');
-    } 
+    }
 
 }
-
-
-
