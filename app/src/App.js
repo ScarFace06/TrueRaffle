@@ -62,13 +62,15 @@ const App = () => {
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/Test'>Test</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/Youtube'>Youtube</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/Instagram'>Instagram</Link></Button></p>
+                                <p><Button type ="link" onClick = {onClose} ><Link to = '/winners'>See All Winners</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/twitter'>test 404</Link></Button></p>
                               </Drawer>
                                   <Switch>
                                     <Route path = "/" exact component = {Home}/>
                                     <Route path = "/Test" exact children = { <MyComponent drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                                     <Route path = "/Youtube" exact children = {<YoutubeRaffle/>}/>
-                                    <Route path = "/Instagram" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                                    <Route path = "/Instagram" exact children = {<InstagramRaffle/>}/>
+                                    <Route path = "/winners" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
 
 
                                     <Route component = {()=>{

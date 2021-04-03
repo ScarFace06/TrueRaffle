@@ -1,25 +1,42 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { newContextComponents } from "@drizzle/react-components";
 import logo from "../logo.png";
+import {Button} from 'antd';
+import Rafflecards from './Rafflecards'
 
 const { AccountData, ContractData, ContractForm } = newContextComponents;
 
 export default ({ drizzle, drizzleState }) => {
   // destructure drizzle and drizzleState from props
+  const [dataKey, setDataKey] = useState('');
+
+  useEffect(()=>{
+    const contract = drizzle.contracts.Raffle;
+    //console.log(drizzleState)
+    const dk = contract.methods.counter.cacheCall();
+    //console.log(dataKey);
+    setDataKey(dk)
+    // ok the data cant be getted on load cuz drizzleState takes a while
+
+  },[])
+
+
+
+let count = drizzleState.contracts.Raffle.counter[dataKey];
+
+ const getCards = (v)=>{
+   let res = []
+   for(var i = 0; i<v; i++){
+     res.push(<Rafflecards drizzle = {drizzle} drizzleState = {drizzleState} position = {i}/>)
+   }
+   return res;
+ }
+
+
   return (
-      <div className="section">
-        <h2>Test</h2>
-        <p>
-          <strong>Stored Value: </strong>
-          <ContractData
-            drizzle={drizzle}
-            drizzleState={drizzleState}
-            contract="Raffle"
-            method="countToRInfos"
-            methodArgs = "0"
-          />
-        </p>
-        <ContractForm drizzle={drizzle} contract="Raffle" method="getWinner" />
+      <div style = {{textAlign: "center"}}>
+        <h2>Raffle Winners</h2>
+        <div>{count && getCards(parseInt(count.value))}</div>
       </div>
   );
 };
