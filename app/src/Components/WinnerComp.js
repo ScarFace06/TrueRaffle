@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import { newContextComponents } from "@drizzle/react-components";
-import logo from "../logo.png";
 import {Button} from 'antd';
 import Rafflecards from './Rafflecards'
 
@@ -18,7 +17,7 @@ export default ({ drizzle, drizzleState }) => {
     setDataKey(dk)
     // ok the data cant be getted on load cuz drizzleState takes a while
 
-  },[])
+  },[drizzleState])
 
 
 

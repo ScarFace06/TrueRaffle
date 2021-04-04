@@ -12,6 +12,7 @@ import { newContextComponents } from "@drizzle/react-components";
 import YoutubeRaffle from "./Components/YoutubeRaffle";
 import InstagramRaffle from "./Components/InstagramRaffle";
 import WinnerComp from "./Components/WinnerComp";
+import TestingTrans from "./Components/TestingTrans";
 
 const drizzle = new Drizzle(drizzleOptions);
 const { AccountData, ContractData, ContractForm } = newContextComponents;
@@ -63,6 +64,7 @@ const App = () => {
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/Youtube'>Youtube</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/Instagram'>Instagram</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/winners'>See All Winners</Link></Button></p>
+                                <p><Button type ="link" onClick = {onClose} ><Link to = '/Testing'>Testing</Link></Button></p>
                                 <p><Button type ="link" onClick = {onClose} ><Link to = '/twitter'>test 404</Link></Button></p>
                               </Drawer>
                                   <Switch>
@@ -71,6 +73,7 @@ const App = () => {
                                     <Route path = "/Youtube" exact children = {<YoutubeRaffle/>}/>
                                     <Route path = "/Instagram" exact children = {<InstagramRaffle/>}/>
                                     <Route path = "/winners" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                                    <Route path = "/Testing" exact children = {<TestingTrans drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
 
 
                                     <Route component = {()=>{
