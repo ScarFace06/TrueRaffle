@@ -11,7 +11,14 @@ export default ({ drizzle, drizzleState }) => {
   const [id, setId] = useState('')
   const [seed, setSeed] = useState('')
   const [participants, setParticipants] = useState('')
+  const [dataKey, setDataKey] = useState('');
 
+  useEffect(()=>{
+    const contract = drizzle.contracts.LinkTokenInterface;
+    console.log(drizzle)
+    const dk = contract.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
+    setDataKey(dk);
+  },[drizzleState]);
 
   const changeID = (e) =>{
     setId(e.target.value)
@@ -63,12 +70,23 @@ export default ({ drizzle, drizzleState }) => {
 
   };
 
+const sendLink = ()=>{
+  // TODO it works but need to be saperate function for the txhashes
+  // const contract = drizzle.contracts.LinkTokenInterface;
+  // const stack_id = contract.methods.transfer.cacheSend(drizzle.contracts.Raffle.address,'100000000000000000',{
+  //     from: drizzleState.accounts[0]
+  // });
+  // setStackID(stack_id);
+}
 
+let infos = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
 
 
   return (
       <div style = {{textAlign: "center"}}>
+        <p>{infos && infos.value}</p>
         <h2>Testing Transactions</h2>
+        <Button onClick = {sendLink}>Send Link</Button>
         <Input onChange = {changeID} placeholder ='ID'/>
         <Input onChange = {changeSeed} placeholder ='seed'/>
         <Input onChange = {changePa} placeholder ='participants'/>
