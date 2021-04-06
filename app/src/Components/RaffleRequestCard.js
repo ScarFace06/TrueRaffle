@@ -8,7 +8,8 @@ const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 
 
-export default ({ drizzle, drizzleState, position }) => {
+
+export default ({ drizzle, drizzleState, requestId }) => {
   // destructure drizzle and drizzleState from props
   const [dataKey, setDataKey] = useState('');
   const [winnerInfos, setWinnerInfos] = useState({
@@ -21,7 +22,7 @@ export default ({ drizzle, drizzleState, position }) => {
 
   useEffect(()=>{
     const contract = drizzle.contracts.Raffle;
-    const dk = contract.methods.countToRInfos.cacheCall(position);
+    const dk = contract.methods.requestIDtoRInfos.cacheCall(requestId);
     console.log(dataKey);
     setDataKey(dk)
 
@@ -34,10 +35,10 @@ export default ({ drizzle, drizzleState, position }) => {
 
 const loadCard = ()=>{
 
-  let infos = drizzleState.contracts.Raffle.countToRInfos[dataKey];
+  let infos = drizzleState.contracts.Raffle.requestIDtoRInfos[dataKey];
 
   if(!infos)return(
-    <Card loading = {true} title = {position.toString()} style={{ width: 300}}className = "child">
+    <Card loading = {true} title = {requestId} style={{ width: 300}}className = "child">
       <p> ID = ....</p>
       <p> Winner = ......</p>
       <p> Winner comment ...........</p>
@@ -53,8 +54,10 @@ const loadCard = ()=>{
   part_count: "79"
   winner: "58"
   */
+  let parts = parseInt(infos.value.part_count);
+  let wi = parseInt(infos.value.winner)
 
-  if(!gotData){
+  if(!gotData && parts>wi){
     ipfs.catJSON(infos.value.ipfs_hash, (err, result) => {
     console.log(err, result);
     setWinnerInfos({

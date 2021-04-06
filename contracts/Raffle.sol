@@ -6,10 +6,11 @@ import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 contract Raffle is VRFConsumerBase {
 
     struct RandomInfos{
+        string name;
         string id;
+        string ipfs_hash;
         uint256 winner;
         uint256 part_count;
-
     }
 
     mapping (bytes32 => RandomInfos) public requestIDtoRInfos;
@@ -43,17 +44,11 @@ contract Raffle is VRFConsumerBase {
     }
 
 
-    function getWinner(uint256 UserProvidSeed, string memory _id, uint256 participant) public returns (bytes32){
+    function getWinner(uint256 UserProvidSeed, string memory _id, uint256 participant,string memory _name, string memory _hash) public returns (bytes32){
         bytes32 requestID = requestRandomness(keyHash,fee,UserProvidSeed);
-        requestIDtoRInfos[requestID] = RandomInfos(_id,0,participant);
+        requestIDtoRInfos[requestID] = RandomInfos(_name,_id,_hash,(participant+1),participant);
         emit requestedRaffle(requestID);
     }
-
-
-    function gotWinnerEmitter( bytes32 requestID) internal returns (bytes32){
-        emit gotWinner(requestID);
-    }
-
 
     /**
      * Callback function used by VRF Coordinator
@@ -62,7 +57,6 @@ contract Raffle is VRFConsumerBase {
         requestIDtoRInfos[requestId].winner = randomness % requestIDtoRInfos[requestId].part_count;
         countToRInfos[counter] = requestIDtoRInfos[requestId];
         counter++;
-        gotWinnerEmitter(requestId);
     }
 
 

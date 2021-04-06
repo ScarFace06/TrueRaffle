@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
 
+
 const InstagramRaffle = () => {
 
     const [searchInfo, setSearchInfo] = useState(" ");
+
 
     const handleInput = event => {
       setSearchInfo(event.target.value);
@@ -12,6 +14,7 @@ const InstagramRaffle = () => {
 
     const logValue = () => {
       console.log(searchInfo);
+
     };
 
     return (
@@ -20,6 +23,7 @@ const InstagramRaffle = () => {
             <Input onChange={handleInput} placeholder="Link" />
             <Button onClick={logValue} type="primary">Search</Button>
         </div>
+
     );
 };
 

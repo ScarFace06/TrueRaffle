@@ -5,3 +5,10 @@ export const setRequestID = (par)=>{
     param:par
   };
 };
+
+export const setComments = (par)=>{
+  return {
+    type:"setComments",
+    param:par
+  }
+}

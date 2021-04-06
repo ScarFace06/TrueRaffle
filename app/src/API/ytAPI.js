@@ -1,5 +1,9 @@
+import store from "../redux/store";
+import {setComments} from "../redux/actions";
+
 require('dotenv').config();
 const yt_api = process.env.REACT_APP_YOUTUBE_API;
+
 
 /**curl \
   'https://youtube.googleapis.com/youtube/v3/comments?part=snippet&parentId=HrCeEY4_c4I&key=[YOUR_API_KEY]' \
@@ -45,6 +49,8 @@ export const get_comments = async (link) => {
             }
 
         console.log(res);
+        store.dispatch(setComments(res));
+
     } else {
         alert('No valid link');
     }
