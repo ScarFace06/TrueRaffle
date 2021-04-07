@@ -9,11 +9,13 @@
     "@drizzle/store": "^1.5.1",
     "antd": "^4.14.1",
     "dotenv": "^8.2.0",
+    "ipfs-mini": "^1.1.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.2.0",
+    "react-spring": "^9.0.0",
     "redux": "^4.0.5"
   },
   "scripts": {

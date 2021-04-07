@@ -6,28 +6,21 @@ import MyComponent from "./Components/MyComponent";
 import Home from './Components/Home';
 import "./App.css";
 import {BrowserRouter as Router , Switch , Route , Link} from "react-router-dom";
-import { Drawer, Button, Result, Spin } from 'antd';
-import { MenuUnfoldOutlined } from '@ant-design/icons';
+import {Button, Result, Spin } from 'antd';
 import { newContextComponents } from "@drizzle/react-components";
 import YoutubeRaffle from "./Components/YoutubeRaffle";
 import InstagramRaffle from "./Components/InstagramRaffle";
 import WinnerComp from "./Components/WinnerComp";
 import TestingTrans from "./Components/TestingTrans";
+import HeadAndNav from "./Components/HeadAndNav";
+
 
 const drizzle = new Drizzle(drizzleOptions);
 const { AccountData, ContractData, ContractForm } = newContextComponents;
 
 const App = () => {
 
-  const [visible, setVisible] = useState(false);
 
-    const showDrawer = () => {
-      setVisible(true);
-    };
-
-    const onClose = () => {
-      setVisible(false);
-    };
 
 
   return (
@@ -50,23 +43,9 @@ const App = () => {
               return (
                         <Router>
                               <div>
-                                <h1 style = {{textAlign: "center"}}>True Raffle</h1>
-                                <Button type="primary" onClick={showDrawer} icon = {<MenuUnfoldOutlined />}/>
-                              <Drawer
-                                title="Navigation"
-                                placement="left"
-                                closable={true}
-                                onClose={onClose}
-                                visible={visible}
-                              >
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/'>Home</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/Test'>Test</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/Youtube'>Youtube</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/Instagram'>Instagram</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/winners'>See All Winners</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/Testing'>Testing</Link></Button></p>
-                                <p><Button type ="link" onClick = {onClose} ><Link to = '/twitter'>test 404</Link></Button></p>
-                              </Drawer>
+                                  <HeadAndNav drizzle ={drizzle} drizzleState = {drizzleState} />
+                                  
+
                                   <Switch>
                                     <Route path = "/" exact component = {Home}/>
                                     <Route path = "/Test" exact children = { <MyComponent drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
@@ -87,17 +66,6 @@ const App = () => {
                                         )
                                       }}/>
                                   </Switch>
-                                  <div className="section">
-                                    <h2>Active Account</h2>
-                                    <AccountData
-                                      drizzle={drizzle}
-                                      drizzleState={drizzleState}
-                                      accountIndex={0}
-                                      units="ether"
-                                      precision={3}
-                                    />
-                                  </div>
-
                               </div>
 
                         </Router>
