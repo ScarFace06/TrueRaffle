@@ -19,7 +19,7 @@ export default ({drizzle, drizzleState}) =>{
   const [dataKey, setDataKey] = useState("");
 
   useEffect(()=>{
-    // TODO check if web3 is connected cuz if not it fails ....
+
     console.log(drizzleState);
     const contract = drizzle.contracts.LinkTokenInterface;
     const dk = contract.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
@@ -48,6 +48,17 @@ export default ({drizzle, drizzleState}) =>{
       setVisible(false);
     };
 
+    const convertCur = (value)=>{
+      let t = value.length;
+      for(var i = 0; i<18;i++){
+        t--;
+      }
+      var res = value.slice(0,t);
+      res += ".";
+      res += value.slice(t,t+3);
+      return res;
+    };
+
 
 let linkBalance = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
 
@@ -60,8 +71,8 @@ let linkBalance = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
             <animated.div style = {expand} >
               <Button style = {{float: 'right', paddingbottom: "15px"}} icon = {<animated.div style = {spin}><UserOutlined /></animated.div>}  type = "text"  size = 'large' onClick = {clicked}/>
               <p>{drizzleState.accounts[0]}</p>
-              <p>{<EthLogo/>} {drizzleState.accountBalances[drizzleState.accounts[0]]}</p>
-              <p>{<LinkLogo/>} {linkBalance && linkBalance.value}</p>
+              <p>{<EthLogo/>} {convertCur(drizzleState.accountBalances[drizzleState.accounts[0]])}</p>
+              <p>{<LinkLogo/>} {linkBalance && convertCur(linkBalance.value)}</p>
             </animated.div>
           </div>
             <Drawer

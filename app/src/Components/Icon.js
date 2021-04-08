@@ -7,9 +7,10 @@ import {useSpring, animated, config} from 'react-spring';
 function Icon() {
 
   const [isOver, setIsOver] = React.useState(false);
-
+// if it should look wierd  59.1% 46% 
   const style = useSpring({
-    transformOrigin: " 59.1% 46% ",
+    transformOrigin: "center",
+    transformBox: "fill-box",
     transform: isOver
       ? `rotate(180deg)`
       : `rotate(0deg)`,

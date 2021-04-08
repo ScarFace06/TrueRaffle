@@ -9,8 +9,7 @@ window.web3 = new Web3(window.web3.currentProvider)
 
 const options = {
   web3: {
-    block: false,
-    customProvider: window.web3,
+    block: false
   },
   contracts: [SimpleStorage, Raffle,
     {
