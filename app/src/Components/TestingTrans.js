@@ -3,6 +3,8 @@ import {Button, Input,  } from 'antd';
 import Rafflecards from './Rafflecards'
 import testComments from "../TestData/testComments.json"
 import RaffleRequestCard from "./RaffleRequestCard";
+import {useSelector, shallowEqual} from 'react-redux';
+import {get_comments} from "../API/ytAPI";
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -12,6 +14,7 @@ export default ({ drizzle, drizzleState }) => {
   const [raffle_stackID, setRStackID] = useState('');
   const [link_stackID, setLStackID] = useState('');
   const [name, setName] = useState('')
+  const [searchInfo, setSearchInfo] = useState(" ");
   const [seed, setSeed] = useState('')
   const [dataKey, setDataKey] = useState('');
 
@@ -25,9 +28,24 @@ export default ({ drizzle, drizzleState }) => {
   const changeName = (e) =>{
     setName(e.target.value)
   }
+
+
+
+
+
+
+  const data = useSelector(state => state.comments);
+  const handleInput = event => {
+    setSearchInfo(event.target.value);
+  };
+
+
+
   const changeSeed = (e) =>{
     setSeed(e.target.value);
   }
+
+
 
   const check = (value) =>{
     const reg = /^-?\d*(\.\d*)?$/;
@@ -38,8 +56,12 @@ export default ({ drizzle, drizzleState }) => {
     }
   }
 
-  const setValue =()=>{
+  const youtubeJson = useSelector(state => state.comments, shallowEqual);
+
+
+  const setValue = async ()=>{
     // catch edge cases
+   
     if(name === "")alert("You must choose a Name");
     else if(seed === "" || !check(seed))alert("You must choose a seed");
     else{
@@ -49,13 +71,23 @@ export default ({ drizzle, drizzleState }) => {
       const contract = drizzle.contracts.Raffle;
       //myContract.methods.myMethod([param1[, param2[, ...]]]).send(options[, callback])
       const stack_id = "";
+      
 
-      testComments['name'] = name;
-      testComments['choosenSeed'] = seed;
-      let id = testComments.Link;
-      let participants = testComments.comments.length;
+      console.log("vorher")
+      await get_comments(searchInfo);
+      console.log("nachher")
+      //TODO VON REDUX IMPORTIEREN
+      
+      console.log(youtubeJson);
+      
+      youtubeJson['name'] = name;
+      
+      youtubeJson['choosenSeed'] = seed;
+      let id = youtubeJson.Link;
+      let participants = youtubeJson.comments.length;
 
-      ipfs.addJSON(testComments, (err, result) => {
+
+      ipfs.addJSON(youtubeJson, (err, result) => {
         console.log(err, result);
         const stack_id = contract.methods.getWinner.cacheSend(seed,id,participants,name,result,{
             from: drizzleState.accounts[0]
@@ -146,6 +178,7 @@ export default ({ drizzle, drizzleState }) => {
         <h2>Testing Transactions</h2>
         <div>{getLinkBalance()}</div>
         <Input onChange = {changeName} placeholder ='Name'/>
+        <Input onChange = {handleInput} placeholder ="Link"/>
         <Input onChange = {changeSeed} placeholder ='seed'/>
         <div>
           <p>____________________________</p>

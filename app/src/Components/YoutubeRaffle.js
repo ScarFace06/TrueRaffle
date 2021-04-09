@@ -17,8 +17,6 @@ function YoutubeRaffle() {
 
     };
 
-
-
     return (
         <div>
             <h3 style = {{textAlign: "center"}}>Youtube</h3>

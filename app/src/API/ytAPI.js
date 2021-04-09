@@ -32,25 +32,33 @@ export const get_comments = async (link) => {
                 if (!nextPageToken)break;
                 var resi = await fetch(url);
                 var response = await resi.json();
+                return new Promise(resolve => {
+                    console.log("anfang promise")
+                    for (var i = 0; i < response.items.length; i++) {
 
-                for (var i = 0; i < response.items.length; i++) {
+                        res.comments.push({
+                            user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
+                            comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
+                            time: response.items[i].snippet.topLevelComment.snippet.publishedAt
+                        });
+                    }
+                
+                    nextPageToken = response.nextPageToken ? response.nextPageToken : 0;
+                    url = baseUrl+"&pageToken="+nextPageToken+'&key='+yt_api;
+                    console.log("ende promise")
 
-                    res.comments.push({
-                        user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
-                        comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
-                        ChannelID: response.items[i].snippet.topLevelComment.snippet.authorChannelId.value,
-                        time: response.items[i].snippet.topLevelComment.snippet.publishedAt
-                    });
-                }
-
-                nextPageToken = response.nextPageToken ? response.nextPageToken : 0;
-                url = baseUrl+"&pageToken="+nextPageToken+'&key='+yt_api;
-
+                    
+                    console.log(res);
+                    store.dispatch(setComments(res));
+                    resolve();
+                });
             }
 
-        console.log(res);
-        store.dispatch(setComments(res));
+            res["init"] = true;
+            console.log(res);
+            store.dispatch(setComments(res));
 
+        
     } else {
         alert('No valid link');
     }
