@@ -68,7 +68,7 @@ const loadCard = ()=>{
   if(!gotData){
     ipfs.catJSON(infos.value.ipfs_hash, (err, result) => {
     console.log(err, result);
-    if(!err){
+    if(err){
       setWinnerInfos({
         winner:result.comments[parseInt(infos.value.winner)].user,
         comment:result.comments[parseInt(infos.value.winner)].comment,

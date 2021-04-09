@@ -1,21 +1,14 @@
 const Raffle = artifacts.require('Raffle')
 const { LinkToken } = require('@chainlink/contracts/truffle/v0.4/LinkToken')
-
+const TrueRaffleCoin = artifacts.require('TrueRaffleCoin')
 
 
 module.exports = async (deployer, network, [defaultAccount]) => {
-    // Local (development) networks need their own deployment of the LINK
-    // token and the Oracle contract
-    if (!network.startsWith('kovan')) {
-        LinkToken.setProvider(deployer.provider)
-        try {
-            await deployer.deploy(LinkToken, { from: defaultAccount })
-            await deployer.deploy(Raffle, LinkToken.address)
-        } catch (err) {
-            console.error(err)
-        }
-    } else {
+
         // For now, this is hard coded to Kovan//
-        deployer.deploy(Raffle, '0xa36085F69e2889c224210F603D836748e7dC0088')
-    }
-}
+        const trueRaffleCoin = await TrueRaffleCoin.deployed();
+        await deployer.deploy(Raffle, '0xa36085F69e2889c224210F603D836748e7dC0088',trueRaffleCoin.address);
+        const raffle = await Raffle.deployed();
+        await trueRaffleCoin.transfer(raffle.address, "1000000000000000000000000");
+
+};

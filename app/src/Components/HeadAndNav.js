@@ -7,6 +7,7 @@ import Icon from './Icon';
 import NavButtons from './NavButtons';
 import EthLogo from './EthLogo';
 import LinkLogo from './LinkLogo';
+import TRCLogo from './TRCLogo';
 
 
 
@@ -17,18 +18,22 @@ export default ({drizzle, drizzleState}) =>{
   const [visible, setVisible] = useState(false);
   const [open, SetOpen] = useState(false);
   const [dataKey, setDataKey] = useState("");
+  const [trcKey, setTRCKey] = useState("");
 
   useEffect(()=>{
-
-    console.log(drizzleState);
+    // console.log(drizzle);
+    // console.log(drizzleState);
     const contract = drizzle.contracts.LinkTokenInterface;
     const dk = contract.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
     setDataKey(dk);
-  },[]);
+    const trc = drizzle.contracts.TrueRaffleCoin;
+    const trck = trc.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
+    setTRCKey(trck);
+  },[drizzleState]);
 
   const expand = useSpring({
     float:"right",
-    height: open ? "200px":"70px",
+    height: open ? "230px":"70px",
     overflow:"hidden",
     config: config.wobbly
   })
@@ -49,6 +54,7 @@ export default ({drizzle, drizzleState}) =>{
     };
 
     const convertCur = (value)=>{
+      if(value === "0")return 0;
       let t = value.length;
       for(var i = 0; i<18;i++){
         t--;
@@ -59,8 +65,30 @@ export default ({drizzle, drizzleState}) =>{
       return res;
     };
 
+const linkBalance = () =>{
+  let info = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
 
-let linkBalance = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
+  if(!info)return (<p>loading..</p>);
+
+  let val = convertCur(info.value)
+
+  return (<p>{<LinkLogo/>} {val}</p>);
+
+}
+
+const TRCBalance = () =>{
+  let info = drizzleState.contracts.TrueRaffleCoin.balanceOf[trcKey];
+
+  if(!info)return (<p>loading..</p>);
+
+  let val = convertCur(info.value)
+
+  return (<p>{<TRCLogo/>} {val}</p>);
+
+}
+
+
+
 
     return(
       <div>
@@ -72,7 +100,8 @@ let linkBalance = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
               <Button style = {{float: 'right', paddingbottom: "15px"}} icon = {<animated.div style = {spin}><UserOutlined /></animated.div>}  type = "text"  size = 'large' onClick = {clicked}/>
               <p>{drizzleState.accounts[0]}</p>
               <p>{<EthLogo/>} {convertCur(drizzleState.accountBalances[drizzleState.accounts[0]])}</p>
-              <p>{<LinkLogo/>} {linkBalance && convertCur(linkBalance.value)}</p>
+              <p>{linkBalance()}</p>
+              <p>{TRCBalance()}</p>
             </animated.div>
           </div>
             <Drawer
@@ -88,6 +117,7 @@ let linkBalance = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
               <NavButtons link = '/winners' name ='See all Winners' onClose = {onClose} />
               <NavButtons link = '/Testing' name ='Testing' onClose = {onClose} />
               <NavButtons link = '/twitter' name ='404 Page' onClose = {onClose} />
+              <NavButtons link = "/GetTRC" name = 'Get TrueRaffleCoin' onClose = {onClose}/>
           </Drawer>
       </div>
 

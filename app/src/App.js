@@ -15,6 +15,7 @@ import TestingTrans from "./Components/TestingTrans";
 import HeadAndNav from "./Components/HeadAndNav";
 import {useTransition, animated} from 'react-spring';
 import BodyAndRoutes from './Components/BodyAndRoutes';
+import LoadingLogo from './Components/LoadingLogo';
 
 const drizzle = new Drizzle(drizzleOptions);
 const { AccountData, ContractData, ContractForm } = newContextComponents;
@@ -35,7 +36,7 @@ const App = () => {
                 return (
                   <div>
                     <h3 style = {{textAlign: "center"}}>Please wait while we are Connecting to the Chain</h3>
-                      <div style = {{textAlign: "center"}}><Spin size="large"  /></div>
+                      <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
                   </div>
                 )
               }

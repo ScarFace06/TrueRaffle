@@ -7,6 +7,7 @@ import InstagramRaffle from "./InstagramRaffle";
 import WinnerComp from "./WinnerComp";
 import TestingTrans from "./TestingTrans";
 import {useTransition, animated} from 'react-spring';
+import Swap from './Swap';
 
 
 
@@ -29,6 +30,7 @@ export default ({drizzle, drizzleState}) =>{
                 <Route path = "/Instagram" exact children = {<InstagramRaffle/>}/>
                 <Route path = "/winners" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/Testing" exact children = {<TestingTrans drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                <Route path = "/GetTRC" exact children = {<Swap drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
 
                 <Route component = {()=>{
                     return(

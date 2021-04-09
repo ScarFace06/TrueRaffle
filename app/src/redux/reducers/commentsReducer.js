@@ -1,4 +1,4 @@
-export default  (state = {}, action)=>{
+export default  (state = {init: false}, action)=>{
   switch (action.type){
 
     case "setComments":

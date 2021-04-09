@@ -3,6 +3,7 @@ import { newContextComponents } from "@drizzle/react-components";
 import logo from "../logo.png";
 import {Button} from 'antd';
 import { Card } from 'antd';
+import LoadingLogo from './LoadingLogo';
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -23,10 +24,10 @@ export default ({ drizzle, drizzleState, requestId }) => {
   useEffect(()=>{
     const contract = drizzle.contracts.Raffle;
     const dk = contract.methods.requestIDtoRInfos.cacheCall(requestId);
-    console.log(dataKey);
+    //console.log(dataKey);
     setDataKey(dk)
 
-  },[])
+},[drizzleState])
 
 
 
@@ -56,7 +57,7 @@ const loadCard = ()=>{
   */
   let parts = parseInt(infos.value.part_count);
   let wi = parseInt(infos.value.winner)
-
+  console.log(wi);
   if(!gotData && parts>wi){
     ipfs.catJSON(infos.value.ipfs_hash, (err, result) => {
     console.log(err, result);

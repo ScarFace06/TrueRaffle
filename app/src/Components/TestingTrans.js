@@ -3,6 +3,7 @@ import {Button, Input,  } from 'antd';
 import Rafflecards from './Rafflecards'
 import testComments from "../TestData/testComments.json"
 import RaffleRequestCard from "./RaffleRequestCard";
+import LoadingLogo from "./LoadingLogo";
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -10,17 +11,10 @@ const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 export default ({ drizzle, drizzleState }) => {
   // destructure drizzle and drizzleState from props
   const [raffle_stackID, setRStackID] = useState('');
-  const [link_stackID, setLStackID] = useState('');
   const [name, setName] = useState('')
   const [seed, setSeed] = useState('')
-  const [dataKey, setDataKey] = useState('');
 
-  useEffect(()=>{
-    const contract = drizzle.contracts.LinkTokenInterface;
-    // console.log(drizzle)
-    const dk = contract.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
-    setDataKey(dk);
-  },[drizzleState]);
+  
 
   const changeName = (e) =>{
     setName(e.target.value)
@@ -46,7 +40,8 @@ export default ({ drizzle, drizzleState }) => {
 
 
       // const get Contract
-      const contract = drizzle.contracts.Raffle;
+      const raffle_contract = drizzle.contracts.Raffle;
+      const trc_contract = drizzle.contracts.TrueRaffleCoin;
       //myContract.methods.myMethod([param1[, param2[, ...]]]).send(options[, callback])
       const stack_id = "";
 
@@ -57,20 +52,24 @@ export default ({ drizzle, drizzleState }) => {
 
       ipfs.addJSON(testComments, (err, result) => {
         console.log(err, result);
-        const stack_id = contract.methods.getWinner.cacheSend(seed,id,participants,name,result,{
-            from: drizzleState.accounts[0]
-        });
-        setLStackID("");
-        setRStackID(stack_id);
+        if(!err){
+          trc_contract.methods
+          .approve(drizzle.contracts.Raffle.address, '1000000000000000000')
+          .send({ from: drizzleState.accounts[0] })
+          .on("transactionHash", (hash) => {
+            const stack_id = raffle_contract.methods.getWinner.cacheSend(seed,id,participants,name,result,{
+                from: drizzleState.accounts[0]
+            });
+            setRStackID(stack_id);
+          })
+        }
+
       });
-
-
-
-
 
     }
 
   }
+
 
   const getTxStatus = () =>{
     // get the transaction states from the drizzle state
@@ -90,61 +89,17 @@ export default ({ drizzle, drizzleState }) => {
        <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req}/>
      )
    }
-   return `Transaction status: ${transactions[txHash] && transactions[txHash].status}`;
+   return (<LoadingLogo width = "150" height ="150"/>);
 
   };
 
-  const sendLink = ()=>{
-    // TODO it works but need to be saperate function for the txhashes
-    const contract = drizzle.contracts.LinkTokenInterface;
-    const stack_id = contract.methods.transfer.cacheSend(drizzle.contracts.Raffle.address,'100000000000000000',{
-        from: drizzleState.accounts[0]
-    });
-    setLStackID(stack_id);
-  }
 
-  const getLinkBalance =()=>{
-    // TODO make it beautiful
-    let infos = drizzleState.contracts.LinkTokenInterface.balanceOf[dataKey];
-
-    if(!infos)return null;
-    var balance = infos.value.slice(0,3)
-    balance += ","
-    balance += infos.value.slice(3,5);
-    return (
-      <div>
-        <p> your Link balance is {balance}</p>
-      </div>
-    );
-  }
-
-  const linkTransfered =()=>{
-    // get the transaction states from the drizzle state
-   const { transactions, transactionStack } = drizzleState;
-
-   // get the transaction hash using our saved `stackId`
-   const txHash = transactionStack[link_stackID];
-
-   if(!txHash)return (<p>Please transfere some link to start the Raffle</p>);
-
-
-   if (transactions[txHash] && transactions[txHash].status === 'success'){
-
-     return (
-       <Button onClick = {setValue}>get Winner</Button>
-     );
-   }
-
-   return `Transaction status: ${transactions[txHash] && transactions[txHash].status}`;
-
-  }
 
 
 
   return (
       <div style = {{textAlign: "center"}}>
         <h2>Testing Transactions</h2>
-        <div>{getLinkBalance()}</div>
         <Input onChange = {changeName} placeholder ='Name'/>
         <Input onChange = {changeSeed} placeholder ='seed'/>
         <div>
@@ -154,8 +109,7 @@ export default ({ drizzle, drizzleState }) => {
           <p></p>
           <p>____________________________</p>
         </div>
-        <Button onClick = {sendLink}>Send Link</Button>
-        <div>{linkTransfered()}</div>
+        <Button onClick = {setValue}>get Winner</Button>
         <div>{getTxStatus()}</div>
       </div>
   );
