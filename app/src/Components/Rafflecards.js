@@ -70,15 +70,15 @@ const loadCard = ()=>{
     console.log(err, result);
     if(err){
       setWinnerInfos({
-        winner:result.comments[parseInt(infos.value.winner)].user,
-        comment:result.comments[parseInt(infos.value.winner)].comment,
-        time:result.comments[parseInt(infos.value.winner)].time
+        winner:"error",
+        comment:"error",
+        time:"error"
       });
     }else{
       setWinnerInfos({
-        winner:testComments.comments[parseInt(infos.value.winner)].user,
-        comment:testComments.comments[parseInt(infos.value.winner)].comment,
-        time:testComments.comments[parseInt(infos.value.winner)].time
+        winner:result.comments[parseInt(infos.value.winner)].user,
+        comment:result.comments[parseInt(infos.value.winner)].comment,
+        time:result.comments[parseInt(infos.value.winner)].time
       });
     }
     });

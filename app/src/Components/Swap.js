@@ -8,6 +8,7 @@ export default ({drizzle , drizzleState}) =>{
 
 const [stackID, setStackID] = useState("");
 const [amount, setAmount] = useState(1);
+const [loading, setLoading] = useState(false);
 
 const openNotification = () => {
   notification.open({
@@ -23,7 +24,7 @@ const openNotification = () => {
 
 
   const getTRC = ()=>{
-
+      setLoading(true);
       const toSend = amount.toString()+"00000000000000000";
     drizzle.contracts.LinkTokenInterface.methods
       .approve(drizzle.contracts.Raffle.address, toSend)
@@ -33,6 +34,7 @@ const openNotification = () => {
             from: drizzleState.accounts[0]
         });
         setStackID(stack_id);
+
       })
     };
 
@@ -50,13 +52,24 @@ const openNotification = () => {
    // otherwise, return the transaction status
    if (transactions[txHash] && transactions[txHash].status === 'success'){
      setStackID("");
+     setLoading(false);
      openNotification();
    }
-   return (<LoadingLogo width = "150" height ="150"/>);
+   return (
+        <div>
+        <p> Waiting for Transaction</p>
+        <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
+        </div>
+    );
   }
 
   const onChange = (value)=>{
     setAmount(value);
+  }
+
+  const price = ()=>{
+      let res = amount *0.1;
+      return "It will Cost "+res.toString()+" Link";
   }
 
   return(
@@ -64,7 +77,8 @@ const openNotification = () => {
       <h1>Get Your TrueRaffleCoin´s </h1>
       <p>Amount</p>
       <InputNumber min={1} max={100} defaultValue={1} onChange={onChange}/>
-      <Button type = "primary" onClick = {getTRC}>swap</Button>
+      <Button type = "primary" onClick = {getTRC} disabled = {loading}>swap</Button>
+      <p>{price()}</p>
       <p>{getTxStatus()}</p>
     </div>
   );

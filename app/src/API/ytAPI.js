@@ -12,7 +12,7 @@ const yt_api = process.env.REACT_APP_YOUTUBE_API;
   --compressed
  */
 
-  const youtube_parser = (url) =>{
+  export const youtube_parser = (url) =>{
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = url.match(regExp);
     return (match&&match[7].length===11)? match[7] : false;
@@ -32,13 +32,13 @@ export const get_comments = async (link) => {
                 if (!nextPageToken)break;
                 var resi = await fetch(url);
                 var response = await resi.json();
+                // console.log(response);
 
                 for (var i = 0; i < response.items.length; i++) {
 
                     res.comments.push({
                         user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
                         comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
-                        ChannelID: response.items[i].snippet.topLevelComment.snippet.authorChannelId.value,
                         time: response.items[i].snippet.topLevelComment.snippet.publishedAt
                     });
                 }
@@ -48,8 +48,9 @@ export const get_comments = async (link) => {
 
             }
 
-        console.log(res);
-        store.dispatch(setComments(res));
+        // console.log(res);
+        // store.dispatch(setComments(res));
+        return res;
 
     } else {
         alert('No valid link');

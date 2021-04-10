@@ -2,18 +2,22 @@ import React, {useState} from "react";
 import { Input } from "antd";
 import { Button } from 'antd';
 import {get_comments} from "../API/ytAPI";
-import {useSelector} from 'react-redux';
 
 function YoutubeRaffle() {
 
     const [searchInfo, setSearchInfo] = useState(" ");
-    const data = useSelector(state => state.comments);
+
     const handleInput = event => {
       setSearchInfo(event.target.value);
     };
 
-    const logValue = () => {
-      get_comments(searchInfo);
+    const logValue = async () => {
+       const comments = await get_comments(searchInfo);
+       if(comments){
+           console.log(comments);
+       }else {
+           alert("an error occurred");
+       }
 
     };
 

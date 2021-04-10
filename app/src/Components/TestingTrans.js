@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Button, Input,  } from 'antd';
 import Rafflecards from './Rafflecards'
-import testComments from "../TestData/testComments.json"
 import RaffleRequestCard from "./RaffleRequestCard";
 import LoadingLogo from "./LoadingLogo";
+import {get_comments, youtube_parser} from "../API/ytAPI";
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -13,8 +13,9 @@ export default ({ drizzle, drizzleState }) => {
   const [raffle_stackID, setRStackID] = useState('');
   const [name, setName] = useState('')
   const [seed, setSeed] = useState('')
+  const [loading, setLoading] = useState(false);
 
-  
+  const [yt_link, setYTlink] = useState('');
 
   const changeName = (e) =>{
     setName(e.target.value)
@@ -32,39 +33,47 @@ export default ({ drizzle, drizzleState }) => {
     }
   }
 
-  const setValue =()=>{
+  const setValue = async () =>{
     // catch edge cases
     if(name === "")alert("You must choose a Name");
-    else if(seed === "" || !check(seed))alert("You must choose a seed");
+    else if(seed === "" || !check(seed))alert("You must choose a seed only numbers are allowed");
+    else if(!youtube_parser(yt_link))alert("No Valid Link");
     else{
+        setLoading(true);
+        const testComments = await get_comments(yt_link);
+        if(testComments){
 
+            // const get Contract
+            const raffle_contract = drizzle.contracts.Raffle;
+            const trc_contract = drizzle.contracts.TrueRaffleCoin;
+            //myContract.methods.myMethod([param1[, param2[, ...]]]).send(options[, callback])
+            const stack_id = "";
 
-      // const get Contract
-      const raffle_contract = drizzle.contracts.Raffle;
-      const trc_contract = drizzle.contracts.TrueRaffleCoin;
-      //myContract.methods.myMethod([param1[, param2[, ...]]]).send(options[, callback])
-      const stack_id = "";
+            testComments['name'] = name;
+            testComments['choosenSeed'] = seed;
+            let id = testComments.Link;
+            let participants = testComments.comments.length;
 
-      testComments['name'] = name;
-      testComments['choosenSeed'] = seed;
-      let id = testComments.Link;
-      let participants = testComments.comments.length;
+            ipfs.addJSON(testComments, (err, result) => {
+              console.log(err, result);
+              if(!err){
+                trc_contract.methods
+                .approve(drizzle.contracts.Raffle.address, '1000000000000000000')
+                .send({ from: drizzleState.accounts[0] })
+                .on("transactionHash", (hash) => {
+                  const stack_id = raffle_contract.methods.getWinner.cacheSend(seed,id,participants,name,result,{
+                      from: drizzleState.accounts[0]
+                  });
+                  setRStackID(stack_id);
+                  setLoading(false);
+                })
+              }
 
-      ipfs.addJSON(testComments, (err, result) => {
-        console.log(err, result);
-        if(!err){
-          trc_contract.methods
-          .approve(drizzle.contracts.Raffle.address, '1000000000000000000')
-          .send({ from: drizzleState.accounts[0] })
-          .on("transactionHash", (hash) => {
-            const stack_id = raffle_contract.methods.getWinner.cacheSend(seed,id,participants,name,result,{
-                from: drizzleState.accounts[0]
             });
-            setRStackID(stack_id);
-          })
+        }else{
+            alert("Some error occurred")
         }
 
-      });
 
     }
 
@@ -72,6 +81,13 @@ export default ({ drizzle, drizzleState }) => {
 
 
   const getTxStatus = () =>{
+
+     if(loading) return (
+         <div>
+         <p> Fetching Youtube comments</p>
+         <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
+         </div>
+     );
     // get the transaction states from the drizzle state
    const { transactions, transactionStack } = drizzleState;
 
@@ -89,10 +105,18 @@ export default ({ drizzle, drizzleState }) => {
        <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req}/>
      )
    }
-   return (<LoadingLogo width = "150" height ="150"/>);
+   return (
+       <div>
+       <p> Waiting for Transaction</p>
+       <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
+       </div>
+   );
 
   };
 
+  const handleInput = (e)=>{
+      setYTlink(e.target.value);
+  }
 
 
 
@@ -104,12 +128,12 @@ export default ({ drizzle, drizzleState }) => {
         <Input onChange = {changeSeed} placeholder ='seed'/>
         <div>
           <p>____________________________</p>
-          <p></p>
-          <p>Here would be the YT stuff</p>
-          <p></p>
+
+              <Input onChange={handleInput} placeholder="Link" />
+
           <p>____________________________</p>
         </div>
-        <Button onClick = {setValue}>get Winner</Button>
+        <Button onClick = {setValue} disabled = {loading}>get Winner</Button>
         <div>{getTxStatus()}</div>
       </div>
   );
