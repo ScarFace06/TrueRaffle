@@ -14,8 +14,12 @@ export default ({ drizzle, drizzleState }) => {
   const [name, setName] = useState('')
   const [seed, setSeed] = useState('')
   const [loading, setLoading] = useState(false);
-
   const [yt_link, setYTlink] = useState('');
+  const [hashtag, setHashtag] = useState("");
+
+
+
+  
 
   const changeName = (e) =>{
     setName(e.target.value)
@@ -40,7 +44,7 @@ export default ({ drizzle, drizzleState }) => {
     else if(!youtube_parser(yt_link))alert("No Valid Link");
     else{
         setLoading(true);
-        const testComments = await get_comments(yt_link);
+        const testComments = await get_comments(yt_link, hashtag);
         if(testComments){
 
             // const get Contract
@@ -119,10 +123,14 @@ export default ({ drizzle, drizzleState }) => {
   }
 
 
+  const handleHashtag = event => {
+    setHashtag(event.target.value);
+  };
+  
 
 
   return (
-      <div style = {{textAlign: "center"}}>
+      <div style = {{textAlign: "center", padding: "100px"}}>
         <h2>Testing Transactions</h2>
         <Input onChange = {changeName} placeholder ='Name'/>
         <Input onChange = {changeSeed} placeholder ='seed'/>
@@ -130,6 +138,7 @@ export default ({ drizzle, drizzleState }) => {
           <p>____________________________</p>
 
               <Input onChange={handleInput} placeholder="Link" />
+              <Input onChange={handleHashtag} placeholder="Hashtag"/>
 
           <p>____________________________</p>
         </div>

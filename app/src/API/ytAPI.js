@@ -20,7 +20,7 @@ const yt_api = process.env.REACT_APP_YOUTUBE_API;
 
 
 
-export const get_comments = async (link) => {
+export const get_comments = async (link, hashtag) => {
     let id = youtube_parser(link);
     var baseUrl = 'https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&order=time&maxResults=100&videoId=' + id;
     var url = baseUrl+'&key='+yt_api;
@@ -35,12 +35,14 @@ export const get_comments = async (link) => {
                 // console.log(response);
 
                 for (var i = 0; i < response.items.length; i++) {
-
-                    res.comments.push({
-                        user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
-                        comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
-                        time: response.items[i].snippet.topLevelComment.snippet.publishedAt
-                    });
+                    
+                    if (response.items[i].snippet.topLevelComment.snippet.textOriginal.trim().toLowerCase().includes(hashtag.trim().toLowerCase())) {
+                        res.comments.push({
+                            user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
+                            comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
+                            time: response.items[i].snippet.topLevelComment.snippet.publishedAt
+                        });
+                    }
                 }
 
                 nextPageToken = response.nextPageToken ? response.nextPageToken : 0;
