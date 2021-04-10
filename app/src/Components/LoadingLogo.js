@@ -28,11 +28,10 @@ export default ({width, height})=> {
       height = {height}
       preserveAspectRatio="xMaxYMax meet"
     >
-      <animated.g style = {{transformOrigin: "center",transformBox: "fill-box",...loop}}><use
-        width={width}
-        height={height}
-        x={width /2}
-        y={height /2}
+      <animated.g style = {{maring: "0 auto",transformOrigin: "center",transformBox: "fill-box",...loop}}><use
+        width="100%"
+        height="100%"
+
         transform="matrix(.99994 0 0 .9996 0 0)"
         xlinkHref="#_Image1"
       ></use></animated.g>

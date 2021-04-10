@@ -68,7 +68,7 @@ const openNotification = () => {
   }
 
   const price = ()=>{
-      let res = amount *0.1;
+      let res = amount /10;
       return "It will Cost "+res.toString()+" Link";
   }
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Button, Input,  } from 'antd';
+import {Button, Input, Space } from 'antd';
 import Rafflecards from './Rafflecards'
 import RaffleRequestCard from "./RaffleRequestCard";
 import LoadingLogo from "./LoadingLogo";
@@ -85,7 +85,7 @@ export default ({ drizzle, drizzleState }) => {
      if(loading) return (
          <div>
          <p> Fetching Youtube comments</p>
-         <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
+         <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200" /></div>
          </div>
      );
     // get the transaction states from the drizzle state
@@ -108,7 +108,7 @@ export default ({ drizzle, drizzleState }) => {
    return (
        <div>
        <p> Waiting for Transaction</p>
-       <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200"  /></div>
+       <div style = {{textAlign: "center"}}><LoadingLogo width = "200" height = "200" /></div>
        </div>
    );
 
