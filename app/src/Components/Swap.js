@@ -72,15 +72,15 @@ const entry = useSpring({
 
   const price = ()=>{
       let res = amount /10;
-      return "It will Cost "+res.toString()+" Link";
+      return "Price: "+res.toString()+"Link";
   }
 
   return(
     <animated.div  className = "divs" style = {entry} >
-      <h1>{<TRCLogo width = "50" height = "50"/>}Get Your TrueRaffleCoin´s {<TRCLogo width = "50" height = "50"/>}</h1>
+      <h1>{<TRCLogo width = "50" height = "50"/>}Get Your TrueRaffleCoins {<TRCLogo width = "50" height = "50"/>}</h1>
       <p>Amount</p>
       <InputNumber min={1} max={100} defaultValue={1} onChange={onChange} className = "in"/>
-      <Button type = "default" onClick = {getTRC} disabled = {loading} className = "btn">swap</Button>
+      <Button type = "default" onClick = {getTRC} disabled = {loading} className = "btn">Swap</Button>
       <p>{price()}</p>
       <p>{getTxStatus()}</p>
     </animated.div>

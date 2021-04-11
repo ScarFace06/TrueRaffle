@@ -52,7 +52,7 @@ export default ({ drizzle, drizzleState }) => {
   const setValue = async () =>{
     // catch edge cases
     if(name === "")alert("You must choose a Name");
-    else if(seed === "" || !check(seed))alert("You must choose a seed only numbers are allowed");
+    else if(seed === "" || !check(seed))alert("You must choose a seed, only numbers are allowed");
     else if(!youtube_parser(yt_link))alert("No Valid Link");
     else{
         dispatch(setComments({init:false}));
@@ -143,12 +143,12 @@ export default ({ drizzle, drizzleState }) => {
         <h2>Youtube Raffle</h2>
         <p>every raffle costs one TrueRaffleCoin</p>
         <Input onChange = {changeName} className="in" placeholder ='Name'/>
-        <Input onChange = {changeSeed} className="in" placeholder ='seed'/>
+        <Input onChange = {changeSeed} className="in" placeholder ='Seed'/>
         <div>
               <Input onChange={handleInput} className="in" placeholder="Link" />
               <Input onChange={handleHashtag} className="in" placeholder="Hashtag"/>
         </div>
-        <Button type = "default" className="btn" onClick = {setValue} disabled = {loading}>get Winner</Button>
+        <Button type = "default" className="btn" onClick = {setValue} disabled = {loading}>Raffle</Button>
         <div>{getTxStatus()}</div>
       </animated.div>
   );
