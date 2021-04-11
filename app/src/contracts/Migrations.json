@@ -48,16 +48,16 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"last_completed_migration\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"completed\",\"type\":\"uint256\"}],\"name\":\"setCompleted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/whyno/documents/github/TrueRaffle2/contracts/Migrations.sol\":\"Migrations\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/whyno/documents/github/TrueRaffle2/contracts/Migrations.sol\":{\"keccak256\":\"0xe0b35e3fdce4ee868c4cc21e6122f7e3ed739027066d6093a4e20426227e170a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6c2390b4f39383fc47525bfa6b32adcec840aa327467b03fe6319b52f352df96\",\"dweb:/ipfs/QmRGU8CZpbv17FqxLLqhKQQqk1AremtzZd4JpUqN9UbHcE\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610185806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220d37588a669a37315e77ca684063d58d64e3b246d1f24894600dd76f79b04bd4564736f6c634300060c0033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220d37588a669a37315e77ca684063d58d64e3b246d1f24894600dd76f79b04bd4564736f6c634300060c0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"last_completed_migration\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"completed\",\"type\":\"uint256\"}],\"name\":\"setCompleted\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/whyno/documents/github/trueraffle2/contracts/Migrations.sol\":\"Migrations\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/whyno/documents/github/trueraffle2/contracts/Migrations.sol\":{\"keccak256\":\"0xe0b35e3fdce4ee868c4cc21e6122f7e3ed739027066d6093a4e20426227e170a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6c2390b4f39383fc47525bfa6b32adcec840aa327467b03fe6319b52f352df96\",\"dweb:/ipfs/QmRGU8CZpbv17FqxLLqhKQQqk1AremtzZd4JpUqN9UbHcE\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550610185806100606000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220db7e0613bf8564bdcc9520d8f58959f61ef7ffa6b17b1f995661799745ebe80d64736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063445df0ac146100465780638da5cb5b14610064578063fdacd57614610098575b600080fd5b61004e6100c6565b6040518082815260200191505060405180910390f35b61006c6100cc565b604051808273ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6100c4600480360360208110156100ae57600080fd5b81019080803590602001909291905050506100f0565b005b60015481565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60008054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141561014c57806001819055505b5056fea2646970667358221220db7e0613bf8564bdcc9520d8f58959f61ef7ffa6b17b1f995661799745ebe80d64736f6c634300060c0033",
   "immutableReferences": {},
   "sourceMap": "66:339:0:-:0;;;161:56;;;;;;;;;;200:10;192:5;;:18;;;;;;;;;;;;;;;;;;66:339;;;;;;",
   "deployedSourceMap": "66:339:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;118:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;92:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;294:109;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;118:36;;;;:::o;92:20::-;;;;;;;;;;;;:::o;294:109::-;273:5;;;;;;;;;;259:19;;:10;:19;;;255:26;;;387:9:::1;360:24;:36;;;;255:26:::0;294:109;:::o",
   "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.21 <0.7.0;\n\ncontract Migrations {\n    address public owner;\n    uint public last_completed_migration;\n\n    constructor() public {\n        owner = msg.sender;\n    }\n\n    modifier restricted() {\n        if (msg.sender == owner) _;\n    }\n\n    function setCompleted(uint completed) public restricted {\n        last_completed_migration = completed;\n    }\n}\n",
-  "sourcePath": "C:/Users/whyno/documents/github/TrueRaffle2/contracts/Migrations.sol",
+  "sourcePath": "C:/Users/whyno/documents/github/trueraffle2/contracts/Migrations.sol",
   "ast": {
-    "absolutePath": "/C/Users/whyno/documents/github/TrueRaffle2/contracts/Migrations.sol",
+    "absolutePath": "/C/Users/whyno/documents/github/trueraffle2/contracts/Migrations.sol",
     "exportedSymbols": {
       "Migrations": [
         36
@@ -484,7 +484,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/C/Users/whyno/documents/github/TrueRaffle2/contracts/Migrations.sol",
+      "absolutePath": "/C/Users/whyno/documents/github/trueraffle2/contracts/Migrations.sol",
       "exportedSymbols": {
         "Migrations": [
           36
@@ -990,8 +990,8 @@
     "42": {
       "events": {},
       "links": {},
-      "address": "0xdb6B3F9Ef265d6151ABa17D30FF9F63E20f77EFd",
-      "transactionHash": "0x39b7ec916ce9942666fad21e9d064ab50871d23112de6d3a2e0eb5b24ee58a9b"
+      "address": "0x42f68884017ee9C0a02A113c6fA7118e692930d1",
+      "transactionHash": "0xa0f36fdee94fba754aeafbce6bd17d6f220391a5964e75f594e59eb68e8efbb6"
     },
     "5777": {
       "events": {},
@@ -1001,7 +1001,7 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-09T23:16:36.965Z",
+  "updatedAt": "2021-04-11T17:25:21.788Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
