@@ -22,7 +22,7 @@ const leave = ()=>{
 
 
   return (
-    <animated.p  style = {style} onMouseEnter={enter} onMouseOut={leave} onClick = {onClose} >
+    <animated.p style = {style} onMouseEnter={enter} onMouseOut={leave} onClick = {onClose} >
       <Button type ="link"  >
         <Link to = {link} >{name}</Link>
       </Button>

@@ -1,43 +1,147 @@
-
 @import '~antd/dist/antd.css';
 
-.App {
-  text-align: center;
-  margin: 2rem;
-}
-
-.logo{
-  display: block;
-   margin: auto;
-}
-.section {
-  text-align: left;
-  max-width: 720px;
-  margin: 4rem auto auto;
-}
 .child {
-  margin: 0 auto;
-
-  padding-top: 30px;
-  padding-bottom: 30px
+  margin: auto;
+  margin-bottom: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  max-width: 40rem;
+  box-shadow: 4px 3px 8px 1px #000000;
+  border-radius: 15px; 
+  border: none;
+  background:rgb(33, 36, 41);
 }
-
+.child_req {
+  margin: auto;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  max-width: 40rem;
+  border-radius: 15px; 
+  border: rgb(195, 197, 198);;
+  background:rgb(33, 36, 41);
+}
 
 .headerButtons {
-  display: flex;
-  justify-content: space-between;
-  padding-right: 10px;
-  padding-left: 10px;
-  padding-top: 20px;
-  padding-bottom: 35px
+  max-width: 100%;
+  padding-top: 2rem;
+  padding-bottom: 3.5rem;
+}
 
+
+
+.logo{
+  display: flex;
+  margin-left: 17rem;
+  justify-content: center;
 }
 
 body{
-  background-color: #ececec;
+  background: rgb(43, 53, 70);
+  background: linear-gradient(180deg, rgb(43, 51, 65) 0%, rgb(44, 49, 57) 55%, rgb(44, 47, 54) 100%) no-repeat;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
-.container {
+
+.in {
+  text-align: center;
+  color: rgb(255, 255, 255); 
+  margin: 1rem;
+  max-width: 80%;
+  height: 3rem;
+  border-color: rgb(44, 47, 54);
+  background: transparent;
+  border-radius: 15px; 
+  border: none;
+  border-bottom: solid 3px rgb(44, 47, 54);
+}
+.in:hover {
+  border-color: rgb(44, 47, 54);
+}
+.in:focus {
+  border-color: rgb(43, 53, 70);
+}
+
+.loader{
   display: flex;
   justify-content: center;
+  text-align: unset;
+  max-width: unset;
+}
+
+p, h1, h2, h3, h4, h5 {
+  color: rgb(195, 197, 198); 
+}
+
+.divs  {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: auto;
+  margin-bottom: 1rem;
+  text-align: center;
+  max-width: 40rem;
+  border-radius: 30px;
+  box-shadow: 4px 3px 8px 1px rgb(44, 47, 54);
+  background:rgb(33, 36, 41);
+  color: rgb(241, 255, 255);
+  box-shadow: 4px 3px 8px 1px #000000
+}
+
+.btn {
+  margin: 1rem;
+  background-color: rgb(70, 102, 170);
+  border-radius: 30px; 
+  color: rgb(241, 255, 255);
+  border: none;
+  box-shadow: 4px 3px 8px 1px #000000;
+}
+.btn:hover {
+  color: rgb(241, 255, 255);
+  background-color: rgb(50, 82, 150);
+}
+.Homebtn {
+  margin: 7px;
+  width: 80%;
+  height: 100px;
+  font-size: 28px;
+  background-color: rgb(70, 102, 170); 
+  box-shadow: 6px 5px 8px 1px #000000;
+  border-radius: 30px; 
+  border: none;
+  color: rgb(241, 255, 255);
+}
+.Homebtn:hover {
+  color: rgb(241, 255, 255);
+  background-color: rgb(50, 82, 150);
+}
+
+.ant-drawer-body{
+  background-color: rgb(33, 36, 41);
+  color : rgb(241, 255, 255);
+}
+
+.ant-drawer-header{
+  background-color: rgb(33, 36, 41);
+  color : rgb(241, 255, 255);
+}
+.ant-drawer-title{
+  color : rgb(241, 255, 255);
+}
+
+.ant-btn-link{
+  color: #ececec;
+}
+
+.ant-btn-link:hover{
+  color: rgb(241, 255, 255);
+}
+.ant-card-head-title{
+  color: rgb(241, 255, 255);
+}
+
+.ant-input-number{
+  color:rgb(195, 197, 198); 
 }

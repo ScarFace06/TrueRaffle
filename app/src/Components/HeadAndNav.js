@@ -18,7 +18,7 @@ export default ({drizzle, drizzleState}) =>{
   const [visible, setVisible] = useState(false);
   const [open, SetOpen] = useState(false);
   const [dataKey, setDataKey] = useState("");
-  const [trcKey, setTRCKey] = useState("");
+  const [trc_value, setTRcValue] = useState("0");
 
   useEffect(()=>{
     // console.log(drizzle);
@@ -26,20 +26,23 @@ export default ({drizzle, drizzleState}) =>{
     const contract = drizzle.contracts.LinkTokenInterface;
     const dk = contract.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
     setDataKey(dk);
-    const trc = drizzle.contracts.TrueRaffleCoin;
-    const trck = trc.methods.balanceOf.cacheCall(drizzleState.accounts[0]);
-    setTRCKey(trck);
   },[drizzleState]);
 
   const expand = useSpring({
     float:"right",
-    height: open ? "230px":"70px",
+    height: open ? "15em":"4.5em",
     overflow:"hidden",
     config: config.wobbly
   })
   const spin = useSpring({
     transform: open ? "rotate(180deg)" : "rotate(0deg)"
   })
+
+  const entry = useSpring({
+    from:{opacity:0, transform: 'translate3d(0,-100%,0)'}, 
+    to:{opacity:1, transform: 'translate3d(0,0%,0)'},
+    config:config.wobely
+});
 
   const clicked = ()=>{
     SetOpen(!open);
@@ -77,13 +80,16 @@ const linkBalance = () =>{
 }
 
 const TRCBalance = () =>{
-  let info = drizzleState.contracts.TrueRaffleCoin.balanceOf[trcKey];
+  
+  const contract = drizzle.contracts.TrueRaffleCoin;
+  contract.methods.balanceOf(drizzleState.accounts[0]).call({from: drizzleState.accounts[0]})
+  .then(res=>{
+    setTRcValue(convertCur(res));
+  });
 
-  if(!info)return (<p>loading..</p>);
+  
 
-  let val = convertCur(info.value)
-
-  return (<p>{<TRCLogo/>} {val}</p>);
+  return (<p>{<TRCLogo width = "15" heigth = "15"/>} {trc_value}</p>);
 
 }
 
@@ -91,35 +97,39 @@ const TRCBalance = () =>{
 
 
     return(
-      <div>
+      <animated.div style = {entry}>
+        
           <div className = "headerButtons">
-          <Button type="text" onClick={showDrawer} icon = {<MenuUnfoldOutlined/>}   style = {{float: 'left'}}  size = 'large'/>
-          <div className = "logo"><Icon/></div>
-
-            <animated.div style = {expand} >
-              <Button style = {{float: 'right', paddingbottom: "15px"}} icon = {<animated.div style = {spin}><UserOutlined /></animated.div>}  type = "text"  size = 'large' onClick = {clicked}/>
-              <p>{drizzleState.accounts[0]}</p>
-              <p>{<EthLogo/>} {convertCur(drizzleState.accountBalances[drizzleState.accounts[0]])}</p>
-              <p>{linkBalance()}</p>
-              <p>{TRCBalance()}</p>
-            </animated.div>
+          
+            <Button type="text" onClick={showDrawer} icon = {<MenuUnfoldOutlined style = {{color:"rgb(241, 255, 255)"}}/>}   style = {{float: 'left'}}  size = 'large'/>
+              <animated.div style = {expand}  >
+                <Button style = {{float: 'right', paddingbottom: "15px"}} icon = {<animated.div style = {spin}><UserOutlined style = {{color:"rgb(241, 255, 255)"}} /></animated.div>}  type = "text"  size = 'large' onClick = {clicked}/>
+                <p>{drizzleState.accounts[0]}</p>
+                <p>{<EthLogo/>} {convertCur(drizzleState.accountBalances[drizzleState.accounts[0]])}</p>
+                <p>{linkBalance()}</p>
+                <p>{TRCBalance()}</p>
+              </animated.div>
+              <div className = "logo"><Icon/></div>
           </div>
+          
             <Drawer
               title="Navigation"
               placement="left"
               closable={true}
               onClose={onClose}
               visible={visible}
+              maskStyle = {{backround:"#878787"}}
+              
             >
+              
               <NavButtons link = "/" name ='Home' onClose = {onClose} />
               <NavButtons link = '/Youtube' name ='Youtube' onClose = {onClose} />
-              <NavButtons link = '/Instagram' name ='Instagram' onClose = {onClose} />
               <NavButtons link = '/winners' name ='See all Winners' onClose = {onClose} />
-              <NavButtons link = '/Testing' name ='Testing' onClose = {onClose} />
-              <NavButtons link = '/twitter' name ='404 Page' onClose = {onClose} />
               <NavButtons link = "/GetTRC" name = 'Get TrueRaffleCoin' onClose = {onClose}/>
-          </Drawer>
-      </div>
+              
+            </Drawer>
+          
+      </animated.div>
 
     );
 

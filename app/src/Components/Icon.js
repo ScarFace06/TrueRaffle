@@ -37,9 +37,11 @@ function Icon() {
       strokeMiterlimit="2"
       clipRule="evenodd"
       viewBox="0 0 808 668"
-      width = "500"
+      max-width = "500"
       height = "200"
       preserveAspectRatio="xMaxYMax meet"
+      textAlign = "center"
+      
     >
       <g transform="translate(-208 -53)">
         <animated.g style = {style} onMouseOver = {enter} onMouseOut = {leave}><use

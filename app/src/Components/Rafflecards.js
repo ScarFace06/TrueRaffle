@@ -34,6 +34,11 @@ export default ({ drizzle, drizzleState, position }) => {
 const style = useSpring({
   scale: isOver ? 1.1 : 0.9
 })
+const entry = useSpring({
+  from:{opacity:0, transform: 'translate3d(-100%,0,0)'}, 
+  to:{opacity:1, transform: 'translate3d(0%,0,0)'},
+  config:config.wobely
+});
 
 const enter = ()=>{
   setIsOver(true);
@@ -48,7 +53,7 @@ const loadCard = ()=>{
   let infos = drizzleState.contracts.Raffle.countToRInfos[dataKey];
 
   if(!infos)return(
-    <Card loading = {true} title = {position.toString()} style={{ width: 300}}className = "child">
+    <Card loading = {true} title = {position.toString()} className = "child">
       <p> ID = ....</p>
       <p> Winner = ......</p>
       <p> Winner comment ...........</p>
@@ -70,9 +75,9 @@ const loadCard = ()=>{
     console.log(err, result);
     if(err){
       setWinnerInfos({
-        winner:"error",
-        comment:"error",
-        time:"error"
+        winner:"Error:ipfs file was deleted",
+        comment:"Error:ipfs file was deleted",
+        time:"Error:ipfs file was deleted"
       });
     }else{
       setWinnerInfos({
@@ -87,7 +92,7 @@ const loadCard = ()=>{
 
   return(
       <animated.div style = {style} >
-        <Card  title = {infos.value.name} style={{ width: 450}}className = "child" onMouseOver = {enter} onMouseOut = {leave} >
+        <Card  title = {infos.value.name} className = "child" onMouseOver = {enter} onMouseOut = {leave} >
           <p> ID = {infos.value.id}</p>
           <p> Winner = {winnerInfos.winner}</p>
           <p> Winner comment = {winnerInfos.comment}</p>
@@ -105,8 +110,8 @@ const loadCard = ()=>{
 
 
   return (
-      <div>
+      <animated.div style = {entry}>
         {loadCard()}
-      </div>
+      </animated.div>
   );
 };

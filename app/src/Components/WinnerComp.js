@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { newContextComponents } from "@drizzle/react-components";
-import {Button} from 'antd';
+import {Button, BackTop} from 'antd';
 import Rafflecards from './Rafflecards'
 
-const { AccountData, ContractData, ContractForm } = newContextComponents;
 
 export default ({ drizzle, drizzleState }) => {
   // destructure drizzle and drizzleState from props
@@ -34,7 +33,9 @@ let count = drizzleState.contracts.Raffle.counter[dataKey];
 
   return (
       <div style = {{textAlign: "center"}}>
+        <BackTop />
         <h2>Raffle Winners</h2>
+        <br/>
         <div>{count && getCards(parseInt(count.value))}</div>
       </div>
   );
