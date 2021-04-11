@@ -18,3 +18,9 @@ The winner is saved on chain and verifiable by the Smartcontract.
 7. run npm start
 
 Note : Your Metamask should be connected to the kovan testnet going to localhost:Port/Testing you can make an Raffle with presaved comments without needing the Youtube Api key
+
+### How it works
+
+![Raffle Request](/Images/rafflerequest.png)
+![Raffle Request](/Images/raffleresult.png)
+![Raffle Request](/Images/Coinsupply.png)
