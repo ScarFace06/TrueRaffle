@@ -1,18 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {Button} from 'antd';
 import { Card } from 'antd';
 import {setComments} from '../redux/actions';
-import LoadingLogo from './LoadingLogo';
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 
 
 
-export default ({ drizzle, drizzleState, requestId }) => {
+export default ({ drizzle, drizzleState, requestId, txHash }) => {
   // destructure drizzle and drizzleState from props
-  const [dataKey, setDataKey] = useState('');
   const [winnerInfos, setWinnerInfos] = useState({
     winner:"...loading",
     comment:"....loading",
@@ -72,6 +69,7 @@ const loadCard =  ()=>{
         <p> Winner comment = {winnerInfos.comment}</p>
         <p> Time {winnerInfos.time}</p>
         <p> Participants = {winnerInfos.part}</p>
+        <p> txHash = {txHash}</p>
       </Card>
     )
 

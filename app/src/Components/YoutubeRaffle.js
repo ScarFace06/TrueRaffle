@@ -26,12 +26,12 @@ export default ({ drizzle, drizzleState }) => {
 
 
     const entry = useSpring({
-        from:{opacity:0, transform: 'translate3d(-100%,0,0)'}, 
+        from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
         to:{opacity:1, transform: 'translate3d(0%,0,0)'},
         config:config.wobely
     });
 
-  
+
 
   const changeName = (e) =>{
     setName(e.target.value)
@@ -115,7 +115,7 @@ export default ({ drizzle, drizzleState }) => {
      let req = transactions[txHash].receipt.events.requestedRaffle.returnValues.requestID
      console.log(req);
      return(
-       <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req}/>
+       <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req} txHash = {txHash}/>
      )
    }
    return (
@@ -135,7 +135,7 @@ export default ({ drizzle, drizzleState }) => {
   const handleHashtag = event => {
     setHashtag(event.target.value);
   };
-  
+
 
 
   return (

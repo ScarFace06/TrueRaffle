@@ -1,24 +1,23 @@
-import React, {useState} from "react";
-import { Input } from "antd";
+import React from "react";
 import { Button } from 'antd';
 import {useSpring, animated, config} from 'react-spring';
-import TRCLogo from './TRCLogo';
+
 
 function Home(probs) {
 
     const entry = useSpring({
-        from:{opacity:0, transform: 'translate3d(-100%,0,0)'}, 
+        from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
         to:{opacity:1, transform: 'translate3d(0%,0,0)'},
         config:config.wobely
       });
-      
+
     return (
 
 
         <animated.div style= {entry} >
             <div className="divs">
             <h1 style = {{textAlign: "center"}}>Home</h1>
-            
+
             <Button type = "default" className="Homebtn"  onClick = {()=>{
                 probs.history.push("/Youtube");
             }}>Youtube Raffle</Button>
@@ -50,10 +49,10 @@ function Home(probs) {
             <br/>
             <br/>
         </animated.div>
-        
 
-        
-            
+
+
+
     );
 }
 

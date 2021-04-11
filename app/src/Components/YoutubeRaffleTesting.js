@@ -115,7 +115,7 @@ export default ({ drizzle, drizzleState }) => {
      let req = transactions[txHash].receipt.events.requestedRaffle.returnValues.requestID
      console.log(req);
      return(
-       <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req}/>
+       <RaffleRequestCard drizzle = {drizzle} drizzleState = {drizzleState} requestId = {req} txHash = {txHash}/>
      )
    }
    return (

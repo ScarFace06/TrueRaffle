@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useTransition, animated, useSpring, config} from "react-spring";
-import {Button, Input, InputNumber, notification } from 'antd';
+import React, {useState} from 'react';
+import {animated, useSpring, config} from "react-spring";
+import {Button, InputNumber, notification } from 'antd';
 import LoadingLogo from './LoadingLogo';
 import TRCLogo from './TRCLogo';
 
@@ -21,7 +21,7 @@ const openNotification = () => {
 };
 
 const entry = useSpring({
-  from:{opacity:0, transform: 'translate3d(-100%,0,0)'}, 
+  from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
   to:{opacity:1, transform: 'translate3d(0%,0,0)'},
   config:config.wobely
 });

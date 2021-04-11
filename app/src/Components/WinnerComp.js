@@ -36,6 +36,8 @@ let count = drizzleState.contracts.Raffle.counter[dataKey];
         <BackTop />
         <h2>Raffle Winners</h2>
         <br/>
+        <Button className = "btn" type = "default" href = {"https://kovan.etherscan.io/address/"+drizzle.contracts.Raffle.address}> View Contract on Etherscan</Button>
+        <br/>
         <div>{count && getCards(parseInt(count.value))}</div>
       </div>
   );
