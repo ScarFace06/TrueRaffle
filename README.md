@@ -38,7 +38,7 @@ Animated the Components with react-spring and done styling with CSS.
 
 Functionality of this project:
 ![link](https://raw.githubusercontent.com/ScarFace06/TrueRaffle/main/Images/rafflerequest.png)
-First the user provides the necessary input (name, seed, link to video, filter word) to the website. True Raffle then send a request to the YouTube Api and gets all the comments. True Raffle processes them into a Json file this File which is saved on an ipfs-node (we used infura-ipfs). Ipfs returns a hash to get to the saved Json. All this information is then sent to the Raffle smart contract where it is saved. The Raffle smart contract then request a random number. After getting the random number which determines the index of the winner.
+First the user provides the necessary input (name, seed, link to video, filter word) to the website. True Raffle then send a request to the YouTube Api and gets all the comments. True Raffle processes them into a Json file. This File is then saved on an ipfs-node (we used infura-ipfs). Ipfs returns a hash to get to the saved Json. All this information is then sent to the Raffle smart contract where it is saved. The Raffle smart contract then request a random number. After getting the random number which determines the index of the winner.
 
 ![Raffle Winner](https://raw.githubusercontent.com/ScarFace06/TrueRaffle/main/Images/raffleresult.png)
 To display all the information to the user. True raffles send a call to the Raffle smart contract getting the id, name, winner index, participation count and the ipfs hash. It then uses the hash to get the metadata from ipfs and stich both information together to display the outcome of the raffle.
