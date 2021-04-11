@@ -22,8 +22,8 @@ Note : Your Metamask should be connected to the kovan testnet going to localhost
 ### How it works
 
 ![Raffle Request](/Images/rafflerequest.png)
-![Raffle Request](/Images/raffleresult.png)
-![Raffle Request](/Images/Coinsupply.png)
+![Raffle Result](/Images/raffleresult.png)
+![CoinSupply](/Images/Coinsupply.png)
 <img src="Images/youtuberaffle.png" alt="Youtube Raffle" width="1000"/>
 <img src="Images/allwinners.png" alt="Youtube Raffle" width="1000"/>
 <img src="Images/rafflecoins.png" alt="Youtube Raffle" width="1000"/>
