@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { newContextComponents } from "@drizzle/react-components";
-import logo from "../logo.png";
 import {Button} from 'antd';
 import testComments from "../TestData/testComments.json";
 import { Card } from 'antd';
@@ -35,7 +33,7 @@ const style = useSpring({
   scale: isOver ? 1.1 : 0.9
 })
 const entry = useSpring({
-  from:{opacity:0, transform: 'translate3d(-100%,0,0)'}, 
+  from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
   to:{opacity:1, transform: 'translate3d(0%,0,0)'},
   config:config.wobely
 });
@@ -71,6 +69,7 @@ const loadCard = ()=>{
   */
 
   if(!gotData){
+      console.log(infos)
     ipfs.catJSON(infos.value.ipfs_hash, (err, result) => {
     console.log(err, result);
     if(err){

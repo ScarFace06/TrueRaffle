@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import logo from "../logo.png";
 import {Button} from 'antd';
 import { Card } from 'antd';
 import {setComments} from '../redux/actions';
@@ -26,7 +25,7 @@ export default ({ drizzle, drizzleState, requestId }) => {
   const data = useSelector(state=>state.comments);
   const dispatch = useDispatch();
 
-  
+
 
 const getData = (hash)=>{
     if(!data.init){
@@ -64,7 +63,7 @@ const loadCard =  ()=>{
       });
 
   }
-    
+
 
     return(
       <Card loading = {loading} title = {loading ? requestId: winnerInfos.name} className = "child_req">
@@ -86,17 +85,17 @@ const loadCard =  ()=>{
 
     /*
     Result 
-    {0: "ss", 1: "https://www.youtube.com/watch?v=jx5jmI0UlXU", 
-    2: "QmX6yj5HpeeF9UYVdWVg4d9XBbnTxT68faWKayvviEWdBw", 
-    3: "918", 
-    4: "917", 
-    name: "ss", 
-    id: "https://www.youtube.com/watch?v=jx5jmI0UlXU", 
-    ipfs_hash: "QmX6yj5HpeeF9UYVdWVg4d9XBbnTxT68faWKayvviEWdBw", 
-    winner: "918", 
+    {0: "ss", 1: "https://www.youtube.com/watch?v=jx5jmI0UlXU",
+    2: "QmX6yj5HpeeF9UYVdWVg4d9XBbnTxT68faWKayvviEWdBw",
+    3: "918",
+    4: "917",
+    name: "ss",
+    id: "https://www.youtube.com/watch?v=jx5jmI0UlXU",
+    ipfs_hash: "QmX6yj5HpeeF9UYVdWVg4d9XBbnTxT68faWKayvviEWdBw",
+    winner: "918",
     part_count: "917"}
-  Raffle*/ 
-  
+  Raffle*/
+
 }
 
 
