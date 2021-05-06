@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import Home from './Home';
 import {BrowserRouter as Router , Switch , Route , Link, useLocation} from "react-router-dom";
-import {Button, Result, Spin } from 'antd';
+import {Button, Result} from 'antd';
 import YoutubeRaffle from "./YoutubeRaffle";
 import InstagramRaffle from "./InstagramRaffle";
 import WinnerComp from "./WinnerComp";
 import YoutubeRaffleTesting from "./YoutubeRaffleTesting";
+import Details from "./Details";
 import {useTransition, animated} from 'react-spring';
 import Swap from './Swap';
 
@@ -23,6 +24,7 @@ export default ({drizzle, drizzleState}) =>{
                 <Route path = "/winners" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/Testing" exact children = {<YoutubeRaffleTesting drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/GetTRC" exact children = {<Swap drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                <Route path = "/winners/:id" children = {<Details drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
 
                 <Route component = {()=>{
                     return(

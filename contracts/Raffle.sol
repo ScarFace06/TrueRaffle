@@ -12,6 +12,7 @@ contract Raffle is VRFConsumerBase {
         string ipfs_hash;
         uint256 winner;
         uint256 part_count;
+        bytes32 chainlinkRequestID;
     }
 
     mapping (bytes32 => RandomInfos) public requestIDtoRInfos;
@@ -55,7 +56,7 @@ contract Raffle is VRFConsumerBase {
         require(TRC.allowance(msg.sender, address(this)) >= coin, "insufficient allowance amount");
         TRC.transferFrom(msg.sender, address(this), coin);
         bytes32 requestID = requestRandomness(keyHash,fee,UserProvidSeed);
-        requestIDtoRInfos[requestID] = RandomInfos(_name,_id,_hash,(participant+1),participant);
+        requestIDtoRInfos[requestID] = RandomInfos(_name,_id,_hash,(participant+1),participant,requestID);
         emit requestedRaffle(requestID);
     }
 

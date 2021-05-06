@@ -12,3 +12,14 @@ export const setComments = (par)=>{
     param:par
   }
 }
+
+export const setReduxWinnerInfos = (chain, ipfs)=>{
+
+  return{
+    type: "setWinnerInfos",
+    param1: chain,
+    param2: ipfs
+  }
+
+
+}
