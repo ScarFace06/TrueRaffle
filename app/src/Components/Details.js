@@ -95,15 +95,28 @@ export default ({drizzle, drizzleState})=>{
     
     */
 
+
+    // Table oder list für Kommentare erstellen
     return (
         <div>
-            <p>Saved on the Blockchain</p>
-            <p>this {data.chain.name}</p>
-            <p>that</p>
-            <p>ok</p>
-            <p>Saved on ipfs</p>
-            <p>that {data.ipfs.Link}</p>
-            
+            <div class="blockchainInfos">
+                <p>Name: {data.chain.name}</p>
+                <p>YouTube link: {data.chain.id}</p>
+                <p>IPFS hash: {data.chain.ipfs_hash}</p>
+                <p>Winner: {data.chain.winner}</p>
+                <p>Participants: {data.chain.part_count}</p>
+                <p>Chainlink request ID: {data.chain.chainlinkRequestID}</p>
+            </div>
+
+            <div class="ipfsInfos">
+                <a href={"https://ipfs.io/ipfs/"+data.chain.ipfs_hash}>Check on IPFS</a>
+                <br/>
+                <a href={data.ipfs.Link}>Check Youtube Link</a>
+                <p>Platform: {data.ipfs.platform}</p>
+                <p>Seed: {data.ipfs.choosenSeed}</p>
+                
+
+            </div>
         </div>
     )
 
