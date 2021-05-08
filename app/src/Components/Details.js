@@ -4,6 +4,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {setReduxWinnerInfos} from "../redux/actions";
 import {Button, Result} from 'antd';
+
+import { Table, Tag, Space } from 'antd';
+
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -96,17 +99,52 @@ export default ({drizzle, drizzleState})=>{
     */
 
 
-    // Table oder list für Kommentare erstellen
+        const columns = [
+            {
+              title: 'Index',
+              dataIndex: 'index',
+              key: 'index',
+            },
+            {
+              title: 'Name',
+              dataIndex: 'name',
+              key: 'name',
+            },
+            {
+              title: 'Comment',
+              dataIndex: 'comment',
+              key: 'comment',
+            }
+          ];
+
+          let iterator = 0;
+          const data_comments = [];
+          data.ipfs.comments.forEach(com => {
+              let dat = {
+                  index: iterator,
+                  name: com.user,
+                  comment: com.comment
+              }
+              data_comments.push(dat);
+              iterator++;
+          });
+
+          let winner = data_comments[data.chain.winner].name;
+
+    // Table oder list für Kommentare erstellen ==> count user comment
     return (
         <div>
             <div class="blockchainInfos">
-                <p>Name: {data.chain.name}</p>
-                <p>YouTube link: {data.chain.id}</p>
+                <p>Raffle: {data.chain.name}</p>
+                <p>YouTube link: <a href={data.chain.id}>{data.chain.id}</a></p>
                 <p>IPFS hash: {data.chain.ipfs_hash}</p>
-                <p>Winner: {data.chain.winner}</p>
+                <p>Winner: {winner}</p>
+                <p>Index: {data.chain.winner}</p>
                 <p>Participants: {data.chain.part_count}</p>
                 <p>Chainlink request ID: {data.chain.chainlinkRequestID}</p>
             </div>
+
+            <Table columns={columns} dataSource={data_comments} size="small" />
 
             <div class="ipfsInfos">
                 <a href={"https://ipfs.io/ipfs/"+data.chain.ipfs_hash}>Check on IPFS</a>
