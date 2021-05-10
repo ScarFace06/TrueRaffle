@@ -20,7 +20,7 @@ const yt_api = process.env.REACT_APP_YOUTUBE_API;
 
 
 
-export const get_comments = async (link, hashtag) => {
+export const get_comments = async (link, hashtag, duplicates) => {
     let id = youtube_parser(link);
     var baseUrl = 'https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet&order=time&maxResults=100&videoId=' + id;
     var url = baseUrl+'&key='+yt_api;
@@ -29,20 +29,37 @@ export const get_comments = async (link, hashtag) => {
     if (id) {
             while(true){
 
+                let done = new Set();
+
                 if (!nextPageToken)break;
                 var resi = await fetch(url);
                 var response = await resi.json();
                 // console.log(response);
 
                 for (var i = 0; i < response.items.length; i++) {
+
+                    let user = response.items[i].snippet.topLevelComment.snippet.authorDisplayName;
+                    let comment = response.items[i].snippet.topLevelComment.snippet.textOriginal;
+                    let time = response.items[i].snippet.topLevelComment.snippet.publishedAt;
+
+                        if (comment.trim().toLowerCase().includes(hashtag.trim().toLowerCase())) {
+
+
+                            // TODO: Testing Duplicate comments
+                            if (duplicates && !done.has(user)) {
+                                done.add(user);
+                            }else if(done.has(user))continue;
+
+                            
+
+                            res.comments.push({
+                                user: user,
+                                comment: comment,
+                                time: time
+                            });
+
+                        }
                     
-                    if (response.items[i].snippet.topLevelComment.snippet.textOriginal.trim().toLowerCase().includes(hashtag.trim().toLowerCase())) {
-                        res.comments.push({
-                            user: response.items[i].snippet.topLevelComment.snippet.authorDisplayName,
-                            comment: response.items[i].snippet.topLevelComment.snippet.textOriginal,
-                            time: response.items[i].snippet.topLevelComment.snippet.publishedAt
-                        });
-                    }
                 }
 
                 nextPageToken = response.nextPageToken ? response.nextPageToken : 0;

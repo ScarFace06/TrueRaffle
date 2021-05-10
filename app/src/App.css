@@ -70,8 +70,12 @@ body{
   max-width: unset;
 }
 
-p, h1, h2, h3, h4, h5 {
+p, h1, h2, h3, h4, h5{
   color: rgb(195, 197, 198); 
+}
+
+.ant-checkbox + span {
+  color: rgb(195, 197, 198);
 }
 
 .divs  {
@@ -144,4 +148,12 @@ p, h1, h2, h3, h4, h5 {
 
 .ant-input-number{
   color:rgb(195, 197, 198); 
+}
+
+.ant-table-cell {
+  background-color: rgb(43, 51, 65, 0.75);
+}
+
+.ant-table-thead > tr > th {
+  background: rgb(43, 51, 65, 0.85);
 }

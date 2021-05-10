@@ -4,6 +4,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {Link, useLocation} from 'react-router-dom';
 import {setReduxWinnerInfos} from "../redux/actions";
 import {Button, Result} from 'antd';
+import {useSpring, config, animated} from 'react-spring';
+
 
 import { Table, Tag, Space } from 'antd';
 
@@ -17,6 +19,12 @@ export default ({drizzle, drizzleState})=>{
     const dispatch = useDispatch();
     const location = useLocation();
     const [gotData, setGotData] = useState(false);
+
+    const entry = useSpring({
+        from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
+        to:{opacity:1, transform: 'translate3d(0%,0,0)'},
+        config:config.wobely
+      });
 
     useEffect(()=>{
         if(!data.chain || !data.ipfs){
@@ -54,12 +62,14 @@ export default ({drizzle, drizzleState})=>{
     if(!gotData){
 
         return(
-            <Result
+            <animated.div style= {entry}>
+                <Result
                 status="404"
                 title="404"
                 subTitle="Sorry, the page you visited does not exist."
                 extra={<Button type="primary"><Link to = "/">Back Home</Link></Button>}
             />
+            </animated.div>
         )
     }
 
@@ -67,7 +77,7 @@ export default ({drizzle, drizzleState})=>{
     
 
 
-    //TODO Daten darstellen 
+    
 
     /**IPFS JSON
         {platform: "Youtube", Link: "https://www.youtube.com/watch?v=ysrdpBq6z4Q", comments: Array(113), name: "TestDetails", choosenSeed: "420"}
@@ -119,21 +129,24 @@ export default ({drizzle, drizzleState})=>{
 
           let iterator = 0;
           const data_comments = [];
-          data.ipfs.comments.forEach(com => {
-              let dat = {
-                  index: iterator,
-                  name: com.user,
-                  comment: com.comment
-              }
-              data_comments.push(dat);
-              iterator++;
-          });
 
-          let winner = data_comments[data.chain.winner].name;
+          data.ipfs.comments.forEach(com => {
+
+            let dat = {
+                index: iterator,
+                name: com.user,
+                comment: com.comment
+            }
+            data_comments.push(dat);
+            iterator++;
+            
+        });
+
+        let winner = data_comments[data.chain.winner].name;
 
     // Table oder list für Kommentare erstellen ==> count user comment
     return (
-        <div>
+        <animated.div style= {entry}>
             <div class="blockchainInfos">
                 <p>Raffle: {data.chain.name}</p>
                 <p>YouTube link: <a href={data.chain.id}>{data.chain.id}</a></p>
@@ -155,7 +168,7 @@ export default ({drizzle, drizzleState})=>{
                 
 
             </div>
-        </div>
+        </animated.div>
     )
 
 

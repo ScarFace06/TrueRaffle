@@ -7,6 +7,7 @@ import {get_comments, youtube_parser} from "../API/ytAPI";
 import {useSpring, animated,config} from 'react-spring';
 import {useSelector, useDispatch} from 'react-redux';
 import {setComments} from '../redux/actions';
+import { Checkbox } from 'antd';
 const IPFS = require('ipfs-mini');
 const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
@@ -19,6 +20,7 @@ export default ({ drizzle, drizzleState }) => {
   const [loading, setLoading] = useState(false);
   const [yt_link, setYTlink] = useState('');
   const [hashtag, setHashtag] = useState("");
+  const [dup, setDuplicate] = useState('');
     const dispatch = useDispatch();
     useEffect(()=>()=>{
         dispatch(setComments({init:false}));
@@ -57,7 +59,7 @@ export default ({ drizzle, drizzleState }) => {
     else{
         dispatch(setComments({init:false}));
         setLoading(true);
-        const testComments = await get_comments(yt_link, hashtag);
+        const testComments = await get_comments(yt_link, hashtag, dup);
         if(testComments){
 
             // const get Contract
@@ -137,6 +139,10 @@ export default ({ drizzle, drizzleState }) => {
   };
 
 
+  function DuplicateOnChange(e) {
+    setDuplicate(e.target.checked);
+  }
+
 
   return (
       <animated.div className="divs" style = {entry}>
@@ -149,6 +155,7 @@ export default ({ drizzle, drizzleState }) => {
               <Input onChange={handleHashtag} className="in" placeholder="Hashtag"/>
         </div>
         <Button type = "default" className="btn" onClick = {setValue} disabled = {loading}>Raffle</Button>
+        <Checkbox onChange={DuplicateOnChange}>allow duplicates</Checkbox>
         <div>{getTxStatus()}</div>
       </animated.div>
   );
