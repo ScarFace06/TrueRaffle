@@ -144,30 +144,23 @@ export default ({drizzle, drizzleState})=>{
 
         let winner = data_comments[data.chain.winner].name;
 
-    // Table oder list für Kommentare erstellen ==> count user comment
     return (
         <animated.div style= {entry}>
             <div class="blockchainInfos">
                 <p>Raffle: {data.chain.name}</p>
+                <p>Platform: {data.ipfs.platform}</p>
                 <p>YouTube link: <a href={data.chain.id}>{data.chain.id}</a></p>
                 <p>IPFS hash: {data.chain.ipfs_hash}</p>
+                <p>Seed: {data.ipfs.choosenSeed}</p>
                 <p>Winner: {winner}</p>
                 <p>Index: {data.chain.winner}</p>
                 <p>Participants: {data.chain.part_count}</p>
                 <p>Chainlink request ID: {data.chain.chainlinkRequestID}</p>
+                <p><a href={"https://ipfs.io/ipfs/"+data.chain.ipfs_hash}>Check on IPFS</a></p>
+                <p><a href={data.ipfs.Link}>Check Youtube Link</a></p>
             </div>
 
             <Table columns={columns} dataSource={data_comments} size="small" />
-
-            <div class="ipfsInfos">
-                <a href={"https://ipfs.io/ipfs/"+data.chain.ipfs_hash}>Check on IPFS</a>
-                <br/>
-                <a href={data.ipfs.Link}>Check Youtube Link</a>
-                <p>Platform: {data.ipfs.platform}</p>
-                <p>Seed: {data.ipfs.choosenSeed}</p>
-                
-
-            </div>
         </animated.div>
     )
 
