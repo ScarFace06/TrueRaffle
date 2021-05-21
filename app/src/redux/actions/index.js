@@ -23,3 +23,14 @@ export const setReduxWinnerInfos = (chain, ipfs)=>{
 
 
 }
+
+export const setGAInfos = (chain, ipfs)=>{
+
+  return{
+    type: "setGAInfos",
+    param1: chain,
+    param2: ipfs
+  }
+
+
+}

@@ -32,7 +32,6 @@ export default  ({drizzle, drizzleState})=>{
     const loadingCoordinator =()=>{
         switch(loadingState){
             case 0:return null;
-            case 1: return <p>Approving Link gas fees</p>;
             case 2: return <p>Approving GiveAway Price transfere</p>;
             case 3: return <p>Saving GiveAway information to IPFS</p>;
             case 4: return <p>Calling GiveAway Smartcontract</p>;
@@ -107,17 +106,13 @@ export default  ({drizzle, drizzleState})=>{
         };
         //TODO error 'insufficient allowance amount'
         //aprove gasfees
-        setLoadingState(1);
-        drizzle.contracts.LinkTokenInterface.methods
-      .approve(drizzle.contracts.RaffleGiveAway.address, "100000000000000000")
-      .send({ from: drizzleState.accounts[0] })
-      .on("transactionHash", (hash) => {
             setLoadingState(2);
             let contract = res.currency == "TRC" ? drizzle.contracts.TrueRaffleCoin : drizzle.contracts.LinkTokenInterface;
             //aprove giveaway coin
             contract.methods.approve(drizzle.contracts.RaffleGiveAway.address, res.amount)
             .send({from: drizzleState.accounts[0]})
             .on("transactionHash",(hash2)=>{
+                console.log(hash2);
                 setLoadingState(3);
                 //safe infos add ipfs
 
@@ -128,6 +123,7 @@ export default  ({drizzle, drizzleState})=>{
                     drizzle.contracts.RaffleGiveAway.methods.createGiveAway(res.name,res.amount,res.currency,iphash,res.seed)
                     .send({from:drizzleState.accounts[0]})
                     .on("transactionHash",(finalHash)=>{
+                        console.log(finalHash);
                         setLoadingState(5);
 
                     })
@@ -139,11 +135,6 @@ export default  ({drizzle, drizzleState})=>{
 
 
             });
-
-        
-
-      })
-
 
         console.log(res);
     }

@@ -127,6 +127,7 @@ const TRCBalance = () =>{
               <NavButtons link = '/winners' name ='See all Winners' onClose = {onClose} />
               <NavButtons link = "/GetTRC" name = 'Get TrueRaffleCoin' onClose = {onClose}/>
               <NavButtons link = "/createGiveAway" name = 'Create GiveAway' onClose = {onClose}/>
+              <NavButtons link = "/GiveAways" name = 'GiveAways' onClose = {onClose}/>
               
             </Drawer>
           

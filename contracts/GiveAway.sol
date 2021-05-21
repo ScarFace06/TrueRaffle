@@ -68,11 +68,9 @@ contract RaffleGiveAway is VRFConsumerBase{
 
 
     function createGiveAway (string memory _name, uint256 _amount, address _currency, string memory _ipfs_hash, uint256 _seed) public {
-        require(IERC20(LinkToken).allowance(msg.sender, address(this)) >= (fee), "insufficient allowance amount");
         require(IERC20(_currency).allowance(msg.sender, address(this)) >= (_amount), "insufficient allowance amount");
-
-        IERC20(LinkToken).transferFrom(msg.sender, address(this),(fee));
         IERC20(_currency).transferFrom(msg.sender, address(this),(_amount));
+        
         address[] storage temp;
         countToGiveAway[count] = GiveAway(_name, msg.sender,_amount, _currency, "", temp, 0,_ipfs_hash, true,count,_seed);
         count++;
@@ -91,7 +89,8 @@ contract RaffleGiveAway is VRFConsumerBase{
     }
 
     function resolveGiveAway(uint256 _id) public {
-
+        require(IERC20(LinkToken).allowance(msg.sender, address(this)) >= (fee), "insufficient allowance amount");
+        IERC20(LinkToken).transferFrom(msg.sender, address(this),(fee));
         require(_id < count, " no such giveaway");
         require(countToGiveAway[_id].on_going, "giveaway already resolved");
         require(countToGiveAway[_id].owner == msg.sender, "not your giveaway boiiii");
