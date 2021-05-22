@@ -37,7 +37,7 @@ export default ({drizzle, drizzleState})=>{
 
                 drizzle.contracts.RaffleGiveAway.methods.getGiveAwayPart(location.pathname.substr(10),i).call({from: drizzleState.accounts[0]})
                 .then(results=>{
-                    res.push(results);
+                    par.push(results);
                 })
             }
         });
@@ -84,10 +84,31 @@ export default ({drizzle, drizzleState})=>{
     }
 
 
+    const takePart=()=>{
+        drizzle.contracts.RaffleGiveAway.methods.takePart(location.pathname.substr(10)).send({from: drizzleState.accounts[0]})
+        .then(res =>{
+            console.log(res);
+            dataFromChain();
+            getParts();
+        })
+    }
+
+
+    const resolveGiveAway=()=>{
+
+        drizzle.contracts.LinkTokenInterface.methods.approve(drizzle.contracts.RaffleGiveAway.address, "100000000000000000").send({from:drizzleState.accounts[0]}).
+        on("transactionHash", (hash)=>{
+            drizzle.contracts.RaffleGiveAway.methods.resolveGiveAway(location.pathname.substr(10)).send({from: drizzleState.accounts[0]})
+            .then(res =>{
+                console.log(res);
+            });
+        });
+        
+    }
     
     
 
-    //TODO take part and resolve giveaway
+    //TODO user 
  
 
     return (
@@ -98,7 +119,9 @@ export default ({drizzle, drizzleState})=>{
             <p>ok</p>
             <p>Saved on ipfs</p>
             <p>that {data.ipfs.discription}</p>
-            
+            {data.chain.on_going ? <Button onClick = {takePart}>Take Part</Button>:null}
+            {data.chain.owner == drizzleState.accounts[0] && data.chain.on_going ? <Button onClick = {resolveGiveAway}>Resolve GiveAway</Button>:null}
+
         </div>
     )
 
