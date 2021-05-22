@@ -9,6 +9,9 @@ import YoutubeRaffleTesting from "./YoutubeRaffleTesting";
 import Details from "./Details";
 import {useTransition, animated} from 'react-spring';
 import Swap from './Swap';
+import CreateGiveAway from "./CreateGiveAway";
+import GiveAways from "./GiveAways";
+import GiveAwayDetails from "./GiveAwayDetails";
 
 
 
@@ -24,7 +27,12 @@ export default ({drizzle, drizzleState}) =>{
                 <Route path = "/winners" exact children = {<WinnerComp drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/Testing" exact children = {<YoutubeRaffleTesting drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/GetTRC" exact children = {<Swap drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                <Route path = "/createGiveAway" exact children = {<CreateGiveAway drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
                 <Route path = "/winners/:id" children = {<Details drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                <Route path = "/Giveaway/:id" children = {<GiveAwayDetails drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                <Route path = "/GiveAways" children = {<GiveAways drizzle = {drizzle} drizzleState = {drizzleState}/>}/>
+                
+                
 
                 <Route component = {()=>{
                     return(
