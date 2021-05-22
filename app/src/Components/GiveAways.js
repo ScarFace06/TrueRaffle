@@ -36,7 +36,11 @@ export default ({drizzle, drizzleState}) =>{
 
     return(
         <animated.div style = {entry}>
-            <h2>GiveAways</h2>
+
+            <div className="divs">
+                <h2>Giveaways</h2>
+            </div>
+
             <div>{count && getCards(parseInt(count.value))}</div>
 
         </animated.div>

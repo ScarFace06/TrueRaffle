@@ -166,9 +166,10 @@ export default  ({drizzle, drizzleState})=>{
 
 
     return(
-        <animated.div  style = {entry}>
-            <Input onChange={setName}  placeholder="Name" />
-            <Input onChange={setDisc}  placeholder="Discription" />
+        <animated.div  style = {entry} className="divs">
+            <h2>Create a Giveaway</h2>
+            <Input onChange={setName} className="in" placeholder="Name" />
+            <Input onChange={setDisc} className="in" placeholder="Discription" />
             <InputNumber
                 style={{
                 width: 200,
@@ -178,7 +179,7 @@ export default  ({drizzle, drizzleState})=>{
                 max="10000"
                 step="1"
                 onChange={setSeed}
-                
+                className="in"
             />
             <InputNumber
                 style={{
@@ -190,6 +191,7 @@ export default  ({drizzle, drizzleState})=>{
                 step="0.0000000000000001"
                 onChange={setAmount}
                 stringMode
+                className="in"
             />
             <Select
                 showSearch
@@ -203,7 +205,7 @@ export default  ({drizzle, drizzleState})=>{
                 <Option value="TRC">TRC</Option>
                 <Option value="LINK">LINK</Option>
             </Select>
-            <Button onClick = {createGiveAway}>create Giveaway</Button>
+            <Button onClick = {createGiveAway} className="btn">create Giveaway</Button>
             <div>{loadingCoordinator()}</div>
 
         </animated.div>

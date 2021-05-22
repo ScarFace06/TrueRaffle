@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { newContextComponents } from "@drizzle/react-components";
 import {Button, BackTop} from 'antd';
 import Rafflecards from './Rafflecards'
+import {useSpring, animated, config} from 'react-spring';
 
 
 export default ({ drizzle, drizzleState }) => {
@@ -18,7 +19,11 @@ export default ({ drizzle, drizzleState }) => {
 
   },[drizzleState])
 
-
+  const entry = useSpring({
+    from:{opacity:0, transform: 'translate3d(-100%,0,0)'},
+    to:{opacity:1, transform: 'translate3d(0%,0,0)'},
+    config:config.wobely
+});
 
 let count = drizzleState.contracts.Raffle.counter[dataKey];
 
@@ -32,13 +37,13 @@ let count = drizzleState.contracts.Raffle.counter[dataKey];
 
 
   return (
-      <div style = {{textAlign: "center"}}>
+      <animated.div style= {entry} className="divs">
         <BackTop />
         <h2>Raffle Winners</h2>
         <br/>
         <Button className = "btn" type = "default" href = {"https://kovan.etherscan.io/address/"+drizzle.contracts.Raffle.address}> View Contract on Etherscan</Button>
         <br/>
         <div>{count && getCards(parseInt(count.value))}</div>
-      </div>
+      </animated.div>
   );
 };

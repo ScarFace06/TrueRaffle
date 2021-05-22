@@ -77,8 +77,8 @@ const entry = useSpring({
 
   return(
     <animated.div  className = "divs" style = {entry} >
-      <h1>{<TRCLogo width = "50" height = "50"/>}Get Your TrueRaffleCoins {<TRCLogo width = "50" height = "50"/>}</h1>
-      <p>Amount</p>
+      <h2>Get Your TrueRaffleCoins</h2>
+      <h3>Amount</h3>
       <InputNumber min={1} max={100} defaultValue={1} onChange={onChange} className = "in"/>
       <Button type = "default" onClick = {getTRC} disabled = {loading} className = "btn">Swap</Button>
       <p>{price()}</p>

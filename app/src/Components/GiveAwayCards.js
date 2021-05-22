@@ -129,7 +129,7 @@ winner: "0"
             <p>ID: {chain.id}</p>
             <p>Discription : {ipfsData.discription}</p>
             <p>Prize : {chain.amount} {chain.currency}</p>
-            <Button onClick= {clicked} >See the Details</Button>
+            <Button onClick= {clicked} className="btn">See the Details</Button>
         </Card>
     </animated.div>
 
